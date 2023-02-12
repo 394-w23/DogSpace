@@ -1,44 +1,55 @@
-import { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Home } from "./pages/Home";
+import { NavBar } from "./NavBar.jsx";
+import { Profile } from "./pages/Profile";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <NavBar />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        // {
+        //   path: "/category",
+        //   element: <Category />,
+        // },
+      ],
+    },
+  ]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button onClick={() => setCount(count => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test hot module replacement (HMR).
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <RouterProvider router={router} />
+    /* //   <div style={{ width: 700, height: 200 }} className="video-responsive">
+    //     <iframe
+    //       width="853"
+    //       height="480"
+    //       src={`https://www.youtube.com/embed/OFZ003dY8cU`}
+    //       frameBorder="0"
+    //       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    //       allowFullScreen
+    //       title="Embedded youtube"
+    //     />
+    //   </div>
+    //   <div style={{ width: 700, height: 200 }} className="video-responsive">
+    //     <iframe
+    //       width="853"
+    //       height="480"
+    //       src={`https://www.youtube.com/embed/OFZ003dY8cU`}
+    //       frameBorder="0"
+    //       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    //       allowFullScreen
+    //       title="Embedded youtube"
+    //     />
+    //   </div> */
   );
 };
 
