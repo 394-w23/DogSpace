@@ -1,29 +1,29 @@
-import "./App.css";
-import { Home } from "./pages/Home";
-import { NavBar } from "./NavBar.jsx";
-import { Profile } from "./pages/Profile";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import './App.css';
+import { Home } from './pages/Home';
+import { NavBar } from './NavBar.jsx';
+import { Profile } from './pages/Profile';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 const App = () => {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <NavBar />,
       children: [
         {
-          path: "/",
-          element: <Home />,
+          path: '/',
+          element: <Home />
         },
         {
-          path: "/profile",
-          element: <Profile />,
-        },
+          path: '/profile',
+          element: <Profile />
+        }
         // {
         //   path: "/category",
         //   element: <Category />,
         // },
-      ],
-    },
+      ]
+    }
   ]);
 
   return (

@@ -20,7 +20,12 @@
     "@vitest/coverage-c8": "^0.25.8",
     "@vitest/ui": "^0.25.8",
     "c8": "^7.12.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
     "jsdom": "^20.0.3",
+    "prettier": "^2.8.4",
     "vite": "^4.0.0"
   }
 }
