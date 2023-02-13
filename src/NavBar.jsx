@@ -4,14 +4,14 @@ export function NavBar() {
   return (
     <>
       <Outlet />
-      <ul>
-        <li>
+      <div className="footer">
+        <div className="foothome">
           <Link to="/">Home</Link>
-        </li>
-        <li>
+        </div>
+        <div className="footprofile">
           <Link to="/profile">Profile</Link>
-        </li>
-      </ul>
+        </div>
+      </div>
     </>
   );
 }
