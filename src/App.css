@@ -37,9 +37,9 @@
   }
 }
 
-button {
+/* button {
   font-size: calc(10px + 2vmin);
-}
+} */
 
 .video-responsive {
   overflow: hidden;

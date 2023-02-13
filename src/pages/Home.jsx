@@ -40,23 +40,36 @@ export const Home = () => {
     </section>
     <section className="content">
         <div className="welcome">
-           Good Morning, Owner
+           Good Morning, Sam
         </div>
       
-        <div className="video-responsive">
-          <iframe
-            width="426.5"
-            height="240"
-            src={`https://www.youtube.com/embed/OFZ003dY8cU`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="Embedded youtube"
-          /> 
-        </div>
+        {/* <div className="videos"> */}
+          <div className="video-responsive">
+            <iframe
+              width="426.5"
+              height="240"
+              src={`https://www.youtube.com/embed/GRLtD01Tkg4`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Embedded youtube"
+            /> 
+          </div>
+          {/* <div className="video-responsive">
+            <iframe
+              width="426.5"
+              height="240"
+              src={`https://www.youtube.com/embed/GRLtD01Tkg4`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Embedded youtube"
+            /> 
+          </div> */}
+        {/* </div> */}
 
         <div className="description">
-             Text Description of Content
+             What to feed your dog today!
         </div>
 
     </section>
