@@ -60,7 +60,7 @@ export const Home = () => {
         </div>
 
     </section>
-    <section>
+    <section className="categories">
       <button> Barking </button>
       <button> Teething </button>
       <button> Feeding </button>
