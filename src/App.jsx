@@ -2,6 +2,7 @@ import './App.css';
 import { Home } from './pages/Home';
 import { NavBar } from './NavBar.jsx';
 import { Profile } from './pages/Profile';
+import { Category } from './pages/Category';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 const App = () => {
@@ -17,11 +18,11 @@ const App = () => {
         {
           path: '/profile',
           element: <Profile />
+        },
+        {
+          path: '/category/:categoryId',
+          element: <Category />
         }
-        // {
-        //   path: "/category",
-        //   element: <Category />,
-        // },
       ]
     }
   ]);
@@ -50,7 +51,6 @@ const App = () => {
     //       title="Embedded youtube"
     //     />
     //   </div> */
-   
   );
 };
 

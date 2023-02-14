@@ -42,16 +42,17 @@
 } */
 
 .video-responsive {
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  position: relative;
-  height: 0;
+  /* overflow: hidden; */
+  /* padding-bottom: 56.25%; */
+  /* position: relative; */
+  width: 70vw;
+  /* height: fit-content; */
 }
 
 .video-responsive iframe {
-  left: 0;
-  top: 0;
+  /* left: 0; */
+  /* top: 0; */
   height: 100%;
-  width: 100%;
-  position: absolute;
+  width: 70vw;
+  /* position: absolute; */
 }
