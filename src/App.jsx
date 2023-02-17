@@ -1,18 +1,22 @@
+import React from 'react';
 import './App.css';
 import { Home } from './pages/Home';
 import { NavBar } from './NavBar.jsx';
 import { Profile } from './pages/Profile';
 import { Category } from './pages/Category';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Form from './pages/form/Form';
 
+// will need to add logic to only show form when it hasn't been filled out, in the home page
 const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <NavBar />,
+      element: <Form />,
+      // element: <NavBar />,
       children: [
         {
-          path: '/',
+          path: '/home',
           element: <Home />
         },
         {

@@ -2,8 +2,9 @@
   /* top: 0;
   left: 0; */
   /* position: fixed; */
+  top: 0;
   width: 100%;
-  height: 3em;
+  height: 2em;
   background-color: #9caf88;
   color: #445a3c;
   font-family: sans-serif;
@@ -29,7 +30,7 @@
 }
 section {
   box-sizing: border-box;
-  margin-bottom: 14px;
+  margin-top: 3px;
   block-size: fit-content;
 }
 
@@ -70,6 +71,7 @@ code {
   background-color: white;
   border-radius: 25px;
   cursor: pointer;
+  padding: none;
 }
 
 .homepic {
@@ -81,9 +83,9 @@ code {
 
 .welcome {
   color: #445a3c;
-  font-weight: bolder;
-  font-size: x-large;
-  padding: 2%;
+  font-weight: bold;
+  font-size: large;
+  padding: none;
 }
 .top {
   flex-direction: column;
@@ -107,12 +109,12 @@ code {
 }
 
 .content-card {
-  margin: 1em;
+  /* margin: 1em; */
   padding: 2%;
   background-color: white;
   border-radius: 25px;
   justify-content: center;
-  border: solid #9caf88;
+  /* border: solid #9caf88; */
   width: 70vw;
   /* height: 200px; */
 }
@@ -149,7 +151,7 @@ a {
   }
 }
 
-button {
+.categoryButton {
   background-color: white;
   border: none;
   color: #445a3c;
@@ -176,18 +178,18 @@ button {
 
 .footer {
   box-sizing: border-box;
-  padding: 1em;
+  padding: 0.2em;
   background-color: #9caf88;
   color: #445a3c;
   left: 0;
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 5em;
+  height: 3.5em;
   font-family: sans-serif;
   border: solid;
   border-bottom: 0;
-  border-radius: 20px 20px 0px 0px;
+  /* border-radius: 20px 20px 0px 0px; */
   flex-direction: row;
   text-align: center;
   padding-bottom: 1em;
