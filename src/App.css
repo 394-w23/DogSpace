@@ -45,15 +45,14 @@
   /* overflow: hidden; */
   /* padding-bottom: 56.25%; */
   /* position: relative; */
-  width: 55vw;
+  width: 90vw;
   /* height: fit-content; */
 }
 
 .video-responsive iframe {
   /* left: 0; */
   /* top: 0; */
-  height: 35vw;;
-  width: 55vw;
-  border-radius: 10%;
+  height: calc(9 / 16 * 90vw);
+  width: 90vw;
   /* position: absolute; */
 }

@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useDbData } from '../utils/firebase';
 import { getEmbedURL } from '../utils/helpers';
+import { ContentCard } from '../components/ContentCard';
 
 export const Home = () => {
-  const [data] = useDbData('content', ['barking'], 'video')
+  const [data] = useDbData('content', ['barking'], 'video');
 
-  console.log(data)
+  console.log(data);
   return (
     <div className="wrapper">
       <div className="top-justified">
@@ -48,27 +49,28 @@ export const Home = () => {
       <div className="bottom-justified">
         <div className="welcome"> Barking </div>
         <div className="horizontal-scroll">
-          {
-            data.map((content, index) => {
-              return (
-                <div key={index} className="content-card">
-                  {/* <div className="videos"> */}
-                  <div className="video-responsive">
-                    <iframe
-                      width="426.5"
-                      height="240"
-                      src={getEmbedURL(content['URL'])}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="Embedded youtube"
-                    />
-                  </div>
-                  {/* <div className="description">What to feed your dog today!</div> */}
-                </div>
-              )
-            })
-          }
+          {data.map((content, index) => {
+            const { URL, category } = content;
+            const type = content['content type'];
+            return <ContentCard key={index} type={type} src={URL} category={category} />;
+            // return (
+            //   <div key={index} className="content-card">
+            //     {/* <div className="videos"> */}
+            //     <div className="video-responsive">
+            //       <iframe
+            //         width="426.5"
+            //         height="240"
+            //         src={getEmbedURL(content['URL'])}
+            //         frameBorder="0"
+            //         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            //         allowFullScreen
+            //         title="Embedded youtube"
+            //       />
+            //     </div>
+            //     {/* <div className="description">What to feed your dog today!</div> */}
+            //   </div>
+            // );
+          })}
         </div>
         
       </div>
