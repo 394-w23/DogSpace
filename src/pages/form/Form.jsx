@@ -18,7 +18,8 @@ export default class Form extends Component {
     dogMeetingPlace: '',
     dogPersonality: [],
     dogTrainingType: '',
-    dogTrainingYears: 0
+    dogTrainingYears: 0,
+    dogIssues: []
   };
 
   // proceeds to the next step
@@ -29,7 +30,14 @@ export default class Form extends Component {
 
   // handles field changes
   handleChange = (input) => (e) => {
-    this.setState({ [input]: e.target.value });
+    if (input === 'dogIssues') {
+      this.setState({ dogIssues: [...this.state.dogIssues, e.target.value] });
+    } else if (input === 'dogPersonality') {
+      this.setState({ dogPersonality: [...this.state.dogPersonality, e.target.value] });
+    } else {
+      this.setState({ [input]: e.target.value });
+    }
+    console.log("set state of " + input + " to " + e.target.value);
   };
 
   render() {

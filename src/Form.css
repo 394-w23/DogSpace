@@ -4,6 +4,17 @@
 
 div {
     background-color: white;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.formContainer {
+    padding-bottom: 24%;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 }
 
 h1 {
@@ -15,11 +26,15 @@ h1 {
 .dogProfileH1 {
     text-align: center;
     font-size: 2rem;
+    margin-left: 0;
 }
 
 h2 {
     text-align: left;
     font-size: 1.4rem;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    margin-top: 6%;
 }
 
 h2 span {
