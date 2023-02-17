@@ -1,0 +1,57 @@
+:root {
+    background: white;
+}
+
+div {
+    background-color: white;
+}
+
+h1 {
+    text-align: left;
+    font-size: 1.8rem;
+    margin-left: 5%;
+}
+
+.dogProfileH1 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+h2 {
+    text-align: left;
+    font-size: 1.4rem;
+}
+
+h2 span {
+    font-size: 0.6rem;
+    font-style: normal;
+}
+
+p {
+    text-align: left;
+    font-size: 0.8rem;
+    margin-left: 5%;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+}
+
+.nextButton {
+    position: fixed;
+    bottom: 3%;
+    left: 5%;
+    width: 90%;
+    background-color: #6fcf97;
+    border: none;
+    color: #134f0e;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 20px;
+}

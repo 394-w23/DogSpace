@@ -74,16 +74,16 @@ export const Home = () => {
           }
         </div>
         <section className="categories">
-          <button>
+          <button className="categoryButton">
             <Link to="/category/barking"> Barking </Link>
           </button>
-          <button>
+          <button className="categoryButton">
             <Link to="/category/teething"> Teething </Link>
           </button>
-          <button>
+          <button className="categoryButton">
             <Link to="/category/feeding">Feeding </Link>
           </button>
-          <button>
+          <button className="categoryButton">
             <Link to="/category/bathroom">Bathroom </Link>
           </button>
         </section>
