@@ -1,4 +1,4 @@
-import { getEmbedURL, getYTImgUrl } from '../utils/helpers';
+import { getEmbedURL, getYTDataUrl, getYTImgUrl } from '../utils/helpers';
 import {
   Card,
   CardMedia,
@@ -11,47 +11,49 @@ import {
   IconButton
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const ContentCard = (props) => {
   const { type, src, category } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [vidData, setVidData] = useState(undefined);
 
+  console.log(vidData);
   const handleClose = () => {
     setModalOpen(false);
   };
 
   const formattedCategoryString = category.charAt(0).toUpperCase() + category.slice(1);
 
-  let title;
-  let imgUrl;
-  let description;
+  useEffect(() => {
+    fetch(getYTDataUrl(src))
+      .then((response) => response.json())
+      .then((data) => setVidData(data));
+  }, [src]);
 
-  switch (type) {
-    case 'video':
-      imgUrl = getYTImgUrl(src);
-      title = 'Youtube Video';
-      description = 'Pulled video description';
-      break;
-    case 'article':
-      imgUrl =
-        'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1397192575/092b69a23aac314913f8227500830d42.png';
-      title = 'PetMd Article';
-      description = 'Pulled article summary maybe?';
-      break;
-  }
+  const imgUrl = getYTImgUrl(src);
+  const title = vidData ? vidData.items[0].snippet.title : 'Loading';
+  const description = '';
+  const channel = vidData ? vidData.items[0].snippet.channelTitle : '';
 
   const card = (
-    <Card sx={{ minWidth: '15rem', maxWidth: '15rem' }}>
+    <Card sx={{ minWidth: '15rem', maxWidth: '15rem', paddingBottom: 0 }}>
       <CardActionArea onClick={() => setModalOpen(true)}>
         <CardMedia sx={{ height: '10rem' }} image={imgUrl} title={title} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            sx={{ maxHeight: '3em', overflow: 'hidden' }}
+            gutterBottom
+            variant="h6"
+            component="div">
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Short description
+          <Typography
+            sx={{ maxHeight: '1.5em', overflow: 'hidden' }}
+            variant="body2"
+            color="text.secondary">
+            {channel}
           </Typography>
         </CardContent>
       </CardActionArea>
