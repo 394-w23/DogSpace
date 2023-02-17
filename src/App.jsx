@@ -7,39 +7,33 @@ import { Category } from './pages/Category';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Form from './pages/form/Form';
 
-// const App = () => {
-//   const router = createBrowserRouter([
-//     {
-//       path: '/',
-//       element: <NavBar />,
-//       children: [
-//         {
-//           path: '/',
-//           element: <Home />
-//         },
-//         {
-//           path: '/profile',
-//           element: <Profile />
-//         },
-//         {
-//           path: '/category/:categoryId',
-//           element: <Category />
-//         }
-//       ]
-//     }
-//   ]);
+// will need to add logic to only show form when it hasn't been filled out, in the home page
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Form />,
+      // element: <NavBar />,
+      children: [
+        {
+          path: '/home',
+          element: <Home />
+        },
+        {
+          path: '/profile',
+          element: <Profile />
+        },
+        {
+          path: '/category/:categoryId',
+          element: <Category />
+        }
+      ]
+    }
+  ]);
 
-//   return (
-//     <RouterProvider router={router} />
-//   );
-// };
-
-function App() {
   return (
-    <div className="App">
-      <Form />
-    </div>
+    <RouterProvider router={router} />
   );
-}
+};
 
 export default App;
