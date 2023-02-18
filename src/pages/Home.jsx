@@ -1,8 +1,10 @@
 import { useDbData } from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { capitalize } from '../utils/helpers';
-import { Autocomplete, Avatar, Button, ButtonGroup, FormControl, TextField } from '@mui/material';
+import { Autocomplete, Avatar, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
+import { useEffect } from 'react';
+import { fetchVids } from '../utils/youtubeDataApi';
 
 const HARDCODED_CATEGORIES = ['barking', 'potty training', 'digging'];
 
@@ -12,6 +14,12 @@ const categories = CATEGORIES.map((category) => {
 
 export const Home = () => {
   const [data] = useDbData('content', HARDCODED_CATEGORIES, 'video');
+
+  // useEffect(() => {
+  //   fetchVids('barking')
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // }, []);
 
   return (
     <div className="wrapper">
