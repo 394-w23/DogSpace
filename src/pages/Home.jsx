@@ -3,12 +3,12 @@ import { ContentCard } from '../components/ContentCard';
 import { capitalize, fetchVids } from '../utils/helpers';
 import { Autocomplete, Avatar, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NavBar } from '../NavBar.jsx';
 
 // import { NavBar } from './NavBar.jsx';
 
-const HARDCODED_CATEGORIES = ['barking', 'potty training', 'digging'];
+const HARDCODED_CATEGORIES = ['barking', 'potty training', 'digging', 'crying', 'howling', 'Licking his body'];
 
 const categories = CATEGORIES.map((category) => {
   return { label: capitalize(category) };
@@ -16,6 +16,19 @@ const categories = CATEGORIES.map((category) => {
 
 export const Home = () => {
   const [data] = useDbData('content', HARDCODED_CATEGORIES, 'video');
+
+  const [selectedCategories, setSelectedCategories] = useState(HARDCODED_CATEGORIES.slice(0,3))
+  // console.log({selectedCategories})
+
+  const handleCategoryClick = (e) => {
+    const id = e.target.id
+    const selected = selectedCategories.includes(id)
+    if (selected) {
+      setSelectedCategories(selectedCategories.filter((category) => category !== id))
+    } else {
+      setSelectedCategories([id, ...selectedCategories])
+    }
+  }
 
   // useEffect(() => {
   //   fetchVids('barking')
@@ -27,30 +40,22 @@ export const Home = () => {
   return (
     <html lang="en">
     <header>
-      <div className="header">
-          
-          <div className="profilepic">
-            <Avatar sx={{ width: '18vw', height: '18vw' }} />
-          </div>
-          <div className="right"> 
-            <div className="petname"> Pubpub </div>
-            <div className="petinfo"> Owner: Samuel Jackson </div>
-            <div className="petinfo"> Corgi          Age: 2 </div>
-          </div>
-          {/* <div className="owner"> */}
-            
+      <div className="header">  
+        <div className="profilepic">
+          <Avatar sx={{ width: '18vw', height: '18vw' }} />
         </div>
-        <div className="categories"> 
-        <button className="categoryButton"> Pooping</button>
-        <button className="categoryButton"> Aggression </button>
-        <button className="categoryButton"> Barking </button>
-       
+        <div className="right"> 
+          <div className="petname"> Pubpub </div>
+          <div className="petinfo"> Owner: Samuel Jackson </div>
+          <div className="petinfo"> Corgi          Age: 2 </div>
+        </div>
+          {/* <div className="owner"> */}
       </div>
       <div className="categories"> 
-        
-        <button className="categoryButton"> Crying </button>
-        <button className="categoryButton"> Howling </button>
-        <button className="categoryButton"> Licking his body </button>
+        {HARDCODED_CATEGORIES.map((category) => {
+          const className = selectedCategories.includes(category) ? 'categoryButton selectedCategoryButton' : 'categoryButton'
+          return <button key={category} id={category} onClick={handleCategoryClick} className={className}>{capitalize(category)}</button>
+        })}
       </div>
     </header>
     <body>
@@ -68,7 +73,7 @@ export const Home = () => {
           )}
         /> */}
       </div>
-      {HARDCODED_CATEGORIES.map((category) => {
+      {selectedCategories.map((category) => {
         return (
           <div key={category} className="bottom-justified">
             <div className="welcome"> {capitalize(category)} </div>
@@ -86,9 +91,6 @@ export const Home = () => {
       })}
     </div>
     </body>
-    <footer>
-    <NavBar />,
-    </footer>
     </html>
     
   );

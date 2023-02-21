@@ -19,7 +19,7 @@ export const ContentCard = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [vidData, setVidData] = useState(undefined);
 
-  console.log(vidData);
+  // console.log(vidData);
   const handleClose = () => {
     setModalOpen(false);
   };
@@ -43,7 +43,7 @@ export const ContentCard = (props) => {
         <CardMedia sx={{ height: '10rem' }} image={imgUrl} title={title} />
         <CardContent>
           <Typography
-            sx={{ maxHeight: '3em', overflow: 'hidden' }}
+            sx={{ maxHeight: '3em', overflow: 'hidden', fontSize: 16, color: 'gray' }}
             gutterBottom
             variant="h6"
             component="div">
