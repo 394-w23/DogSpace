@@ -1,5 +1,6 @@
 import { Outlet, Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
+import PublicIcon from '@mui/icons-material/Public';
 import ProfileIcon from '@mui/icons-material/AccountCircle';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { useState } from 'react';
@@ -14,12 +15,13 @@ export const NavBar = () => {
     <>
       <Outlet />
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-        <BottomNavigation
-          sx={{ justifyContent: 'space-evenly' }}
+        <BottomNavigation 
+          sx={{ justifyContent: 'space-evenly', color: 'gray'}}
           showLabels
           value={value}
           onChange={handleChange}>
           <BottomNavigationAction
+            sx = {{color: 'grey'}}
             component={Link}
             to="/"
             label="Home"
@@ -29,9 +31,10 @@ export const NavBar = () => {
           <BottomNavigationAction
             component={Link}
             to="/profile"
-            label="Profile"
+            label="Explore"
             value="/profile"
-            icon={<ProfileIcon />}
+            icon={<PublicIcon />}
+            
           />
         </BottomNavigation>
       </Paper>
