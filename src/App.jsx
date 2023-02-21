@@ -6,18 +6,18 @@ import { Profile } from './pages/Profile';
 import { Category } from './pages/Category';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Form from './pages/form/Form';
-import { MoodChart } from './components/MoodChart';
+import { IssuesChart, MoodChart } from './components/charts';
 
 // will need to add logic to only show form when it hasn't been filled out, in the home page
 const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Form />,
-      // element: <NavBar />,
+      // element: <Form />,
+      element: <NavBar />,
       children: [
         {
-          path: '/home',
+          path: '/',
           element: <Home />
         },
         {
@@ -27,15 +27,24 @@ const App = () => {
         {
           path: '/category/:categoryId',
           element: <Category />
+        },
+        {
+          path: '/moodchart',
+          element: <MoodChart />
+        },
+        {
+          path: '/issuechart',
+          element: <IssuesChart />
         }
       ]
+    },
+    {
+      path: '/form',
+      element: <Form />
     }
   ]);
 
-  return (
-    // <RouterProvider router={router} />
-    <MoodChart />
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
