@@ -1,77 +1,69 @@
+import { useEffect, useState } from 'react';
+import PetsIcon from '@mui/icons-material/Pets';
 import { useDbData } from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { capitalize, fetchVids } from '../utils/helpers';
-import { Autocomplete, Avatar, TextField } from '@mui/material';
+import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
-import { useEffect, useState } from 'react';
 import { NavBar } from '../NavBar.jsx';
 
 // import { NavBar } from './NavBar.jsx';
 
-const HARDCODED_CATEGORIES = ['barking', 'potty training', 'digging', 'crying', 'howling', 'Licking his body'];
-
-const categories = CATEGORIES.map((category) => {
-  return { label: capitalize(category) };
-});
+const HARDCODED_CATEGORIES = [
+  'barking',
+  'potty training',
+  'digging',
+  'crying',
+  'howling',
+  'Licking his body'
+];
 
 export const Home = () => {
   const [data] = useDbData('content', HARDCODED_CATEGORIES, 'video');
 
-  const [selectedCategories, setSelectedCategories] = useState(HARDCODED_CATEGORIES.slice(0,3))
+  const [selectedCategories, setSelectedCategories] = useState(HARDCODED_CATEGORIES.slice(0, 3));
   // console.log({selectedCategories})
 
-  const handleCategoryClick = (e) => {
-    const id = e.target.id
-    const selected = selectedCategories.includes(id)
+  const handleCategoryClick = (id) => {
+    const selected = selectedCategories.includes(id);
     if (selected) {
-      setSelectedCategories(selectedCategories.filter((category) => category !== id))
+      setSelectedCategories(selectedCategories.filter((category) => category !== id));
     } else {
-      setSelectedCategories([id, ...selectedCategories])
+      setSelectedCategories([id, ...selectedCategories]);
     }
-  }
-
-  // useEffect(() => {
-  //   fetchVids('barking')
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data));
-  // }, []);
-
+  };
 
   return (
-    <html lang="en">
-    <header>
-      <div className="header">  
-        <div className="profilepic">
-          <Avatar sx={{ width: '18vw', height: '18vw' }} />
+    <>
+      <div style={{ position: 'sticky', top: 0, zIndex: 3 }}>
+        <div className="header">
+          <div className="profilepic">
+            <Avatar
+              sx={{ width: '4rem', height: '4rem' }}
+              // src="https://i.ibb.co/xSYxBwV/wto1dmblpwy51.png"
+              src="https://www.scotsman.com/webimg/b25lY21zOmZkOGMxMmRmLWRlOGUtNGM2ZC04NjA1LWU5NzAyOGMyOGJmYzoxNjI3MGQzYS0wMDJkLTQ0MjQtOWRmZi1hYWJiZGYyOTg3MTM=.jpg?crop=61:45,smart&width=800"
+            />
+          </div>
+          <div className="right">
+            <div className="petname"> Pubpub </div>
+            <div className="petinfo"> Owner: Samuel Jackson </div>
+            <div className="petinfo"> Corgi Age: 2 </div>
+          </div>
         </div>
-        <div className="right"> 
-          <div className="petname"> Pubpub </div>
-          <div className="petinfo"> Owner: Samuel Jackson </div>
-          <div className="petinfo"> Corgi          Age: 2 </div>
+        <div className="categories">
+          {HARDCODED_CATEGORIES.map((category) => {
+            const selected = selectedCategories.includes(category);
+            return (
+              <button
+                key={`${category}-button`}
+                onClick={() => handleCategoryClick(category)}
+                className={selected ? 'categoryButton selectedCategoryButton' : 'categoryButton'}>
+                <PetsIcon style={{ marginRight: 5, fontSize: '1.3rem' }} fontSize="inherit" />
+                <h5 style={{ margin: 0 }}>{capitalize(category)}</h5>
+              </button>
+            );
+          })}
         </div>
-          {/* <div className="owner"> */}
-      </div>
-      <div className="categories"> 
-        {HARDCODED_CATEGORIES.map((category) => {
-          const className = selectedCategories.includes(category) ? 'categoryButton selectedCategoryButton' : 'categoryButton'
-          return <button key={category} id={category} onClick={handleCategoryClick} className={className}>{capitalize(category)}</button>
-        })}
-      </div>
-    </header>
-    <body>
-    <div className="wrapper">
-      <div className="top-justified">
-      
-      
-        {/* <Autocomplete
-          options={categories}
-          autoHighlight
-          getOptionLabel={(option) => (option.label ? option.label : '')}
-          style={{ width: 300, margin: 'auto' }}
-          renderInput={(params) => (
-            <TextField {...params} label="Search Categories" variant="filled" />
-          )}
-        /> */}
       </div>
       {selectedCategories.map((category) => {
         return (
@@ -89,9 +81,6 @@ export const Home = () => {
           </div>
         );
       })}
-    </div>
-    </body>
-    </html>
-    
+    </>
   );
 };

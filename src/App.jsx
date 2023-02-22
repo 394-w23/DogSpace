@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import { NavBar } from './NavBar.jsx';
 import { Profile } from './pages/Profile';
 import { Category } from './pages/Category';
+import { ErrorPage } from './pages/ErrorPage';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Form from './pages/form/Form';
 
@@ -14,6 +15,7 @@ const App = () => {
       path: '/',
       // element: <Form />,
       element: <NavBar />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: '/',
@@ -32,16 +34,14 @@ const App = () => {
           element: <Category />
         }
       ]
-    }, 
+    },
     {
       path: '/signup',
       element: <Form />
     }
   ]);
 
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
