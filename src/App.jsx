@@ -30,7 +30,7 @@ const App = () => {
           element: <Profile />
         },
         {
-          path: '/category/:categoryId',
+          path: '/trainer',
           element: <Category />
         }
       ]

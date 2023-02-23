@@ -212,6 +212,19 @@ code {
   width: 70vw;
 }
 
+.trainer {
+  font-family: sans-serif;
+  color: black;
+  /* font-weight: bold;
+  font-size: large; */
+  padding: none;
+  margin-left: 16px;
+  padding-top: 5px;
+  font-weight: bolder;
+  /* height: 40%; */
+  font-size: 1.2em;
+}
+
 .bottom-justified {
   width: 100%;
   /* padding: 1em; */

@@ -99,11 +99,11 @@ export const Home = () => {
           </button>
         </div>
       </div>
-      
+      <div className="welcome"> Experts Solution </div>
       {selectedCategories.map((category) => {
         return (
           <div key={category} className="bottom-justified">
-            <div className="welcome"> {capitalize(category)} </div>
+            <div className="trainer"> {capitalize(category)} </div>
             <div className="horizontal-scroll">
               {data
                 .filter((content) => content.category == category)
