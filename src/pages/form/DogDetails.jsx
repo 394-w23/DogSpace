@@ -182,25 +182,45 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
   ];
 
   return (
-    <div>
-      <FormControl variant="standard" sx={{ width: '90%' }}>
-        <h1 className="dogProfileH1">Set up <br></br>your dog profile</h1>
+    <div className="formContainer">
+      <br></br>
+      <div className="center">
+        <div className="circleContainer">
+          <div className="circle other"></div>
+          <div className="circle current"></div>
+          <div className="circle other"></div>
+          <div className="circle other"></div>
+          <div className="circle other"></div>
+        </div>
+      </div>
+      <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
+        <h1 className="dogProfileH1">
+          Set up your dog profile
+        </h1>
         <div className="avatar">
           <Avatar sx={{ width: '45vw', height: '45vw' }} />
         </div>
         <br></br>
         <TextField
-            type="text"
-            variant="filled"
-            placeholder="Dog Name"
-            value={values.dogName}
-            onChange={handleChange('dogName')}
-            InputProps={{
-              style: {
-                fontSize: '1rem'
-              },
-              disableUnderline: true
-            }}
+          type="text"
+          variant="filled"
+          placeholder="Dog Name"
+          value={values.dogName}
+          onChange={handleChange('dogName')}
+          hiddenLabel
+          InputProps={{
+            style: {
+              background: 'white',
+              fontSize: '0.8rem',
+              width: '90%',
+              marginLeft: '5%',
+              display: 'flex',
+              alignText: 'center',
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5'
+            },
+            disableUnderline: true
+          }}
         />
         <h2>Breed</h2>
         <Autocomplete
@@ -212,25 +232,63 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
         />
         <h2>Birthday</h2>
         <TextField
-            type="date"
-            variant="filled"
-            label="Dog Birthday"
-            value={values.dogBirthday}
-            onChange={handleChange('dogBirthday')}
-            InputProps={{
-              style: {
-                fontSize: '1rem'
-              },
-              disableUnderline: true
-            }}
+          type="date"
+          variant="filled"
+          value={values.dogBirthday}
+          hiddenLabel
+          onChange={handleChange('dogBirthday')}
+          InputProps={{
+            style: {
+              background: 'white',
+              fontSize: '0.8rem',
+              width: '90%',
+              marginLeft: '5%',
+              display: 'flex',
+              alignText: 'center',
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5'
+            },
+            disableUnderline: true
+          }}
         />
         <h2>Sex</h2>
-        <ButtonGroup variant="containerPrimary">
-            <Button value={values.dogGender} onClick={handleChange('dogGender')}>Female</Button>
-            <Button value={values.dogGender} onClick={handleChange('dogGender')}>Male</Button>
+        <ButtonGroup variant="containerPrimary" style={{ justifyContent: 'center' }}>
+          <Button
+            value={values.dogGender}
+            onClick={handleChange('dogGender')}
+            style={{
+              background: 'white',
+              fontSize: '0.8rem',
+              width: '43%',
+              display: 'flex',
+              alignText: 'center',
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5',
+              textTransform: 'none',
+              paddingTop: '4%',
+              paddingBottom: '4%'
+            }}>
+            <b>Female</b>
+          </Button>
+          <Button
+            value={values.dogGender}
+            onClick={handleChange('dogGender')}
+            style={{
+              background: 'white',
+              fontSize: '0.8rem',
+              width: '43%',
+              marginLeft: '5%',
+              display: 'flex',
+              alignText: 'center',
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5',
+              textTransform: 'none'
+            }}>
+            <b>Male</b>
+          </Button>
         </ButtonGroup>
         <button onClick={Continue} className="nextButton">
-          Next
+          <b>Next</b>
         </button>
       </FormControl>
     </div>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PersonalDetails from './PersonalDetails';
 import DogDetails from './DogDetails';
-import DogQuestions from './DogQuestions';
-import DogIssues from './DogIssues';
+import DogBehavior from './DogBehavior';
+import DogTraining from './DogTraining';
 import { Home } from '../Home';
 
 export default class Form extends Component {
@@ -15,10 +15,9 @@ export default class Form extends Component {
     dogBreed: '',
     dogBirthday: Date(),
     dogGender: '',
-    dogMeetingPlace: '',
-    dogPersonality: [],
-    dogTrainingType: '',
-    dogTrainingYears: 0
+    dogBehavior: [],
+    dogToolsAtHome: [],
+    dogTrainingPreference: ''
   };
 
   // proceeds to the next step
@@ -30,6 +29,7 @@ export default class Form extends Component {
   // handles field changes
   handleChange = (input) => (e) => {
     this.setState({ [input]: e.target.value });
+    console.log("set state of " + input + " to " + e.target.value);
   };
 
   render() {
@@ -42,9 +42,9 @@ export default class Form extends Component {
       dogBreed,
       dogBirthday,
       dogGender,
-      dogMeetingPlace,
-      dogPersonality,
-      dogTraining
+      dogBehavior,
+      dogToolsAtHome,
+      dogTrainingPreference
     } = this.state;
     const values = {
       name,
@@ -54,9 +54,9 @@ export default class Form extends Component {
       dogBreed,
       dogBirthday,
       dogGender,
-      dogMeetingPlace,
-      dogPersonality,
-      dogTraining
+      dogBehavior,
+      dogToolsAtHome,
+      dogTrainingPreference
     };
 
     switch (step) {
@@ -74,11 +74,11 @@ export default class Form extends Component {
         );
       case 3:
         return (
-          <DogQuestions nextStep={this.nextStep} handleChange={this.handleChange} values={values} />
+          <DogBehavior nextStep={this.nextStep} handleChange={this.handleChange} values={values} />
         );
       case 4:
         return (
-          <DogIssues nextStep={this.nextStep} handleChange={this.handleChange} values={values} />
+          <DogTraining nextStep={this.nextStep} handleChange={this.handleChange} values={values} />
         );
       case 5:
         return (

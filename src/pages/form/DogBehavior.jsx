@@ -9,7 +9,7 @@ import {
   RadioGroup
 } from '@mui/material';
 
-const DogQuestions = ({ nextStep, handleChange, values }) => {
+const DogBehavior = ({ nextStep, handleChange, values }) => {
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
@@ -103,4 +103,4 @@ const DogQuestions = ({ nextStep, handleChange, values }) => {
   );
 };
 
-export default DogQuestions;
+export default DogBehavior;
