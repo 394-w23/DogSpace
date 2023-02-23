@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore,
+  initializeFirestore,
   collection,
   Timestamp,
   addDoc,
@@ -25,7 +25,9 @@ export const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true
+});
 
 // if (!window.EMULATION && import.meta.env.PROD !== true) {
 //   connectFirestoreEmulator(db, '127.0.0.1', 8080);
@@ -33,11 +35,16 @@ const db = getFirestore(app);
 //   window.EMULATION = true;
 // }
 
-export async function submitForm(id, name) {
+export async function submitForm(state) {
   try {
-    const waitingTimesRef = await addDoc(collection(db, 'Dogs'), {
-      id: id,
-      Name: name
+    const dogProfileRef = await addDoc(collection(db, 'dogs'), {
+      age: state.age,
+      birthday: state.dogBirthday,
+      breed: state.dogBreed,
+      gender: state.dogGender,
+      'health issues': state.dogBehavior,
+      name: state.dogName
+      //todo: tools and training preference, user
     });
     console.log('Document written with ID: ', waitingTimesRef.id);
   } catch (e) {

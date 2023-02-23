@@ -90,7 +90,7 @@ export default class Form extends Component {
         );
       case 5:
         // call firebase submit function w/ state
-          
+        submitForm(this.state);
 
         return (
           <Navigate to='/' />
