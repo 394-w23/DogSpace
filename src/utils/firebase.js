@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
@@ -46,21 +47,30 @@ export async function submitForm(id, name) {
   return 0;
 }
 
-export const useDbData = (collectionName, categories, contentTypes) => {
+export const useContentDb = (contentType, categories) => {
+  const itemsColRef = collection(db, 'content');
+  const dataQuery = query(
+    itemsColRef,
+    where('content type', '==', contentType),
+    where('category', 'in', categories)
+  );
+  return useDbData(dataQuery);
+};
+
+export const useUserDb = (email) => {
+  const itemsColRef = collection(db, 'users');
+  const dataQuery = query(itemsColRef, where('email', '==', email));
+  return useDbData(dataQuery);
+};
+
+export const useDbData = (query) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const itemsColRef = collection(db, collectionName);
-    const dataQuery = query(
-      itemsColRef,
-      where('category', 'in', categories),
-      where('content type', '==', contentTypes)
-    );
-
     const unsubscribe = onSnapshot(
-      dataQuery,
+      query,
       (querySnapshot) => {
         const updatedData = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
         // var contentTypes = {
@@ -80,4 +90,16 @@ export const useDbData = (collectionName, categories, contentTypes) => {
   }, []);
 
   return [data, error, loading];
+};
+
+export const signInWithGoogle = () => {
+  signInWithPopup(getAuth(app), new GoogleAuthProvider());
+};
+
+export const useAuthState = () => {
+  const [user, setUser] = useState();
+
+  useEffect(() => onAuthStateChanged(getAuth(app), setUser), []);
+
+  return [user];
 };

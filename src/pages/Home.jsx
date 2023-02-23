@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PetsIcon from '@mui/icons-material/Pets';
-import { useDbData } from '../utils/firebase';
+import { useContentDb } from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { capitalize, fetchVids } from '../utils/helpers';
 import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
@@ -19,7 +19,7 @@ const HARDCODED_CATEGORIES = [
 ];
 
 export const Home = () => {
-  const [data] = useDbData('content', HARDCODED_CATEGORIES, 'video');
+  const [data] = useContentDb('video', HARDCODED_CATEGORIES);
 
   const [selectedCategories, setSelectedCategories] = useState(HARDCODED_CATEGORIES.slice(0, 3));
   // console.log({selectedCategories})
