@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Navigate } from 'react-router-dom';
 import PersonalDetails from './PersonalDetails';
 import DogDetails from './DogDetails';
 import DogBehavior from './DogBehavior';
 import DogTraining from './DogTraining';
-import { Home } from '../Home';
+import { submitForm } from '../../utils/firebase.js';
 
 export default class Form extends Component {
   state = {
@@ -13,11 +14,11 @@ export default class Form extends Component {
     gender: '',
     dogName: '',
     dogBreed: '',
-    dogBirthday: Date(),
+    dogBirthday: '',
     dogGender: '',
     dogBehavior: [],
     dogToolsAtHome: [],
-    dogTrainingPreference: ''
+    dogTrainingPreference: []
   };
 
   // proceeds to the next step
@@ -28,8 +29,15 @@ export default class Form extends Component {
 
   // handles field changes
   handleChange = (input) => (e) => {
-    this.setState({ [input]: e.target.value });
-    console.log("set state of " + input + " to " + e.target.value);
+      if (Array.isArray(e) || e.hasOwnProperty('label')) {
+        console.log(e);
+        this.setState({ [input]: e });
+      } else {
+        console.log(e);
+        this.setState({ [input]: e.target.value });
+        console.log(e.target.value);
+      }
+    console.log(this.state);
   };
 
   render() {
@@ -81,11 +89,11 @@ export default class Form extends Component {
           <DogTraining nextStep={this.nextStep} handleChange={this.handleChange} values={values} />
         );
       case 5:
+        // call firebase submit function w/ state
+          
+
         return (
-          <Home />
-          // will probably have to pass these values to the home page or something idk
-          // unless it's just retrieved from firebase... then probably not
-          // todo: this is causing a weird error with loading the home page from finishing the form?
+          <Navigate to='/' />
         );
       default:
       // do nothing

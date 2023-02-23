@@ -200,6 +200,7 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
           <Avatar sx={{ width: '45vw', height: '45vw' }} />
         </div>
         <br></br>
+        <br></br>
         <TextField
           type="text"
           variant="filled"
@@ -224,8 +225,10 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
         <h2>Breed</h2>
         <Autocomplete
           value={values.dogBreed}
-          onChange={handleChange('dogBreed')}
+          onChange={(e, newVal) => {handleChange('dogBreed')(newVal)}}
           options={dogBreeds}
+          disableClearable
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           getOptionLabel={(option) => (option.label ? option.label : '')}
           style={{ fontSize: '1rem', width: '90%', marginLeft: '5%', background: '#d9d9d9' }}
           renderInput={(params) => (
@@ -268,7 +271,7 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
         <h2>Sex</h2>
         <ButtonGroup variant="containerPrimary" style={{ justifyContent: 'center' }}>
           <Button
-            value={values.dogGender}
+            value={'female'}
             onClick={handleChange('dogGender')}
             style={{
               background: 'white',
@@ -285,7 +288,7 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
             <b>Female</b>
           </Button>
           <Button
-            value={values.dogGender}
+            value={'male'}
             onClick={handleChange('dogGender')}
             style={{
               background: 'white',
