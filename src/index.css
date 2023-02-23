@@ -2,7 +2,7 @@
   /* top: 0; */
   width: 100%;
   height: fit-content;
-  color: #11614d;
+  color: #118B6D;
   font-family: sans-serif;
   text-align: center;
   justify-content: left;
@@ -14,9 +14,14 @@
   align-items: center;
 }
 
+.top {
+  border-bottom: solid #6fcf97;
+  padding-bottom: .51em;
+}
+
 .welcome {
   font-family: sans-serif;
-  color: #11614d;
+  color: #118B6D;
   /* font-weight: bold;
   font-size: large; */
   padding: none;
@@ -38,7 +43,7 @@
 
 .right {
   font-family: sans-serif;
-  color: #11614d;
+  color: #118B6D;
   font-weight: bold;
   font-size: large;
   margin-left: 10px;
@@ -49,15 +54,24 @@
 }
 
 .petname {
-  font-weight: bolder;
+  font-weight: bold;
   /* height: 40%; */
   font-size: 1.2em;
+  padding-bottom: .1em;
 }
 
 .petinfo {
   height: 22%;
   font-weight: normal;
   font-size: 0.7em;
+  padding-bottom: .4em;
+  color: #11614D;
+}
+.petinfo2 {
+  height: 22%;
+  font-weight: normal;
+  font-size: 0.7em;
+  color: #11614D;
 }
 
 section {
@@ -99,11 +113,61 @@ code {
 .wrapper {
   /* padding-top: 5px; */
 }
+
+.trainingTips {
+  height: 24em;
+  background-color: #D0EBC7;
+  border-radius: 1em;
+  padding: 1em;
+  margin: .5em 1em 1em 1em;
+}
+
+.trainingTopic {
+  background-color: #D0EBC7;
+  color: #1B9C3F;
+  font-weight: bolder;
+  text-align: center;
+  justify-content: right;
+}
+
+.trainingImage {
+  background-color: #D0EBC7;
+  color: #11614d;
+  justify-content: center;
+  align-items: center;
+  /* border: solid; */
+  padding-top: 1em;
+  padding-bottom: 1.5em;
+}
+
+.trainingContent {
+  background-color: #D0EBC7;
+  color: #1B9C3F;
+  padding-bottom: .5em;
+}
+
+.trainingBottom {
+  width: 100%;
+  text-align: right;
+  background-color: #D0EBC7;
+}
+.trainingButton {
+  color: #1B9C3F;
+  width: fit-content;
+  background-color: #8CED8A;
+  align-items: center;
+  margin: .4em;
+  text-align: right;
+  border-radius: 1em;
+  border: none;
+
+}
+
 .cards {
   display: flex;
   flex-direction: column;
   background-color: white;
-  border-radius: 25px;
+  /* border-radius: 25px; */
   cursor: pointer;
   padding: none;
 }
@@ -207,8 +271,8 @@ a {
 }
 
 .selectedCategoryButton {
-  border-color: #6fcf97;
-  background-color: #6fcf9744;
+  border-color: #30C55A;
+  background-color: #D0EBC7;
   color: black;
 }
 
