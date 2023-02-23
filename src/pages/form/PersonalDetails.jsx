@@ -1,9 +1,13 @@
 import React from 'react';
 import '../../Form.css';
 import { Avatar, FormControl, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material';
-import { shadows } from '@mui/system';
 
-const PersonalDetails = ({ nextStep, handleChange, values }) => {
+const PersonalDetails = ({ previousStep, nextStep, handleChange, values }) => {
+  const GoBack = (e) => {
+    e.preventDefault();
+    previousStep();
+  };
+
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
@@ -25,7 +29,6 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
           <div className="circle other"></div>
           <div className="circle other"></div>
           <div className="circle other"></div>
-          <div className="circle other"></div>
         </div>
       </div>
       <h1>Welcome to ZenDog</h1>
@@ -35,6 +38,7 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
         <div className="avatar">
           <Avatar sx={{ width: '45vw', height: '45vw' }} />
         </div>
+        <h6 className="upload"><b>Upload your photo</b></h6>
         <br></br>
         <TextField
           type="text"

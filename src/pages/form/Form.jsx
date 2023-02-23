@@ -21,6 +21,12 @@ export default class Form extends Component {
     dogTrainingPreference: []
   };
 
+  // goes back to the previous step
+  previousStep = () => {
+    const { step } = this.state;
+    this.setState({ step: step - 1 });
+  };
+
   // proceeds to the next step
   nextStep = () => {
     const { step } = this.state;
@@ -29,14 +35,14 @@ export default class Form extends Component {
 
   // handles field changes
   handleChange = (input) => (e) => {
-      if (Array.isArray(e) || e.hasOwnProperty('label')) {
-        console.log(e);
-        this.setState({ [input]: e });
-      } else {
-        console.log(e);
-        this.setState({ [input]: e.target.value });
-        console.log(e.target.value);
-      }
+    if (Array.isArray(e) || e.hasOwnProperty('label')) {
+      console.log(e);
+      this.setState({ [input]: e });
+    } else {
+      console.log(e);
+      this.setState({ [input]: e.target.value });
+      console.log(e.target.value);
+    }
     console.log(this.state);
   };
 
@@ -71,6 +77,7 @@ export default class Form extends Component {
       case 1:
         return (
           <PersonalDetails
+            previousStep={this.previousStep}
             nextStep={this.nextStep}
             handleChange={this.handleChange}
             values={values}
@@ -78,23 +85,36 @@ export default class Form extends Component {
         );
       case 2:
         return (
-          <DogDetails nextStep={this.nextStep} handleChange={this.handleChange} values={values} />
+          <DogDetails
+            previousStep={this.previousStep}
+            nextStep={this.nextStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
         );
       case 3:
         return (
-          <DogBehavior nextStep={this.nextStep} handleChange={this.handleChange} values={values} />
+          <DogBehavior
+            previousStep={this.previousStep}
+            nextStep={this.nextStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
         );
       case 4:
         return (
-          <DogTraining nextStep={this.nextStep} handleChange={this.handleChange} values={values} />
+          <DogTraining
+            previousStep={this.previousStep}
+            nextStep={this.nextStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
         );
       case 5:
         // call firebase submit function w/ state
         submitForm(this.state);
 
-        return (
-          <Navigate to='/' />
-        );
+        return <Navigate to="/" />;
       default:
       // do nothing
     }
