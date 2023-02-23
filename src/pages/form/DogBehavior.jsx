@@ -1,6 +1,9 @@
 import React from 'react';
 import '../../Form.css';
-import { FormControl } from '@mui/material';
+import { FormControl,  
+  Grid,
+  ToggleButtonGroup,
+  ToggleButton} from '@mui/material';
 
 const DogBehavior = ({ nextStep, handleChange, values }) => {
   const Continue = (e) => {
