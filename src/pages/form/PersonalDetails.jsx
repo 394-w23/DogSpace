@@ -31,7 +31,7 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
       <h1>Welcome to ZenDog</h1>
       <h6>Please add your profile.</h6>
       <br></br>
-      <FormControl variant="standard" sx={{ width: '90%' }}>
+      <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
         <div className="avatar">
           <Avatar sx={{ width: '45vw', height: '45vw' }} />
         </div>
@@ -42,6 +42,7 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
           variant="filled"
           value={values.name}
           onChange={handleChange('name')}
+          hiddenLabel
           InputProps={{
             style: {
               background: 'white',
@@ -63,6 +64,7 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
           placeholder="Age"
           value={values.age}
           onChange={handleChange('age')}
+          hiddenLabel
           InputProps={{
             style: {
               background: 'white',
@@ -74,7 +76,7 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
               borderRadius: '8px',
               boxShadow: 'inset 0 2px 8px #e5e5e5'
             },
-            disableUnderline: true
+            disableUnderline: true,
           }}
         />
         <br></br>

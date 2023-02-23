@@ -8,11 +8,27 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
     nextStep();
   };
 
+  const handleButtonColor = (event, newButtonValue) => {
+    if (values.dogIssues.includes(newButtonValue)) {
+      // If the button is already selected, set the color back to the default color
+      return {
+        background: '#d9d9d9',
+        color: 'initial'
+      };
+    } else {
+      // If the button is not selected, set the color to the selected color
+      return {
+        background: '#3f51b5',
+        color: '#fff'
+      };
+    }
+  };
+
   return (
     <>
       <h1>What are your dog's issues?</h1>
-      <FormControl component="fieldset" variant="standard">
-        <Grid container spacing={2} sx={{ width: '100%' }} justify="center" alignItems="center">
+      <FormControl component="fieldset" variant="standard" sx={{ width: '100%', margin: '0' }}>
+        <Grid container spacing={2} sx={{ width: '100%', marginLeft: '-1.5%' }} justify="center" alignItems="center">
           <Grid item xs={6}>
             <ToggleButtonGroup
               orientation="vertical"
@@ -31,6 +47,10 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
                   width: '150px'
+                }}
+                onClick={(event) => {
+                  handleChange('dogIssues');
+                  handleButtonColor(event, 'barking');
                 }}>
                 Barking
               </ToggleButton>
@@ -215,7 +235,7 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
                   aspectRatio: '1/1',
                   width: '150px'
                 }}>
-                Mounting/Humping
+                Mounting / Humping
               </ToggleButton>
               <ToggleButton
                 value="shaking"

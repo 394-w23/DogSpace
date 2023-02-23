@@ -1,134 +1,86 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import PetsIcon from '@mui/icons-material/Pets';
 import { useDbData } from '../utils/firebase';
-import { getEmbedURL } from '../utils/helpers';
+import { ContentCard } from '../components/ContentCard';
+import { capitalize, fetchVids } from '../utils/helpers';
+import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
+import { CATEGORIES } from '../utils/constants';
+import { NavBar } from '../NavBar.jsx';
+
+// import { NavBar } from './NavBar.jsx';
+
+const HARDCODED_CATEGORIES = [
+  'barking',
+  'potty training',
+  'digging',
+  'crying',
+  'howling',
+  'Licking his body'
+];
 
 export const Home = () => {
-  const [data] = useDbData('content', ['barking'], 'video')
+  const [data] = useDbData('content', HARDCODED_CATEGORIES, 'video');
 
-  console.log(data)
+  const [selectedCategories, setSelectedCategories] = useState(HARDCODED_CATEGORIES.slice(0, 3));
+  // console.log({selectedCategories})
+
+  const handleCategoryClick = (id) => {
+    const selected = selectedCategories.includes(id);
+    if (selected) {
+      setSelectedCategories(selectedCategories.filter((category) => category !== id));
+    } else {
+      setSelectedCategories([id, ...selectedCategories]);
+    }
+  };
+
   return (
-    <div className="wrapper">
-      <div className="top-justified">
+    <>
+      <div style={{ position: 'sticky', top: 0, zIndex: 3 }}>
         <div className="header">
-          <div className="top">
-            <h2> DogSpace </h2>
+          <div className="profilepic">
+            <Avatar
+              sx={{ width: '4rem', height: '4rem' }}
+              // src="https://i.ibb.co/xSYxBwV/wto1dmblpwy51.png"
+              src="https://www.scotsman.com/webimg/b25lY21zOmZkOGMxMmRmLWRlOGUtNGM2ZC04NjA1LWU5NzAyOGMyOGJmYzoxNjI3MGQzYS0wMDJkLTQ0MjQtOWRmZi1hYWJiZGYyOTg3MTM=.jpg?crop=61:45,smart&width=800"
+            />
+          </div>
+          <div className="right">
+            <div className="petname"> Pubpub </div>
+            <div className="petinfo"> Owner: Samuel Jackson </div>
+            <div className="petinfo"> Corgi Age: 2 </div>
           </div>
         </div>
-
-        <section className="cards">
-          <div>
-            
-          </div>
-
-          {/* <div className="middle">
-         <div className="middleleft">
-          <div className="featureditems">
-            <div className="featuredlabel">
-              <h1>Preview:</h1>
+        <div className="categories">
+          {HARDCODED_CATEGORIES.map((category) => {
+            const selected = selectedCategories.includes(category);
+            return (
+              <button
+                key={`${category}-button`}
+                onClick={() => handleCategoryClick(category)}
+                className={selected ? 'categoryButton selectedCategoryButton' : 'categoryButton'}>
+                <PetsIcon style={{ marginRight: 5, fontSize: '1.3rem' }} fontSize="inherit" />
+                <h5 style={{ margin: 0 }}>{capitalize(category)}</h5>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      {selectedCategories.map((category) => {
+        return (
+          <div key={category} className="bottom-justified">
+            <div className="welcome"> {capitalize(category)} </div>
+            <div className="horizontal-scroll">
+              {data
+                .filter((content) => content.category == category)
+                .map((content, index) => {
+                  const { URL, category } = content;
+                  const type = content['content type'];
+                  return <ContentCard key={index} type={type} src={URL} category={category} />;
+                })}
             </div>
-            <div className="featureditemslist">
-              featured items
-            </div>
           </div>
-        </div>
-        <div className="middleright">
-          <div className="waitlabel" style={{ backgroundColor: color }}>
-            <div className="waittime"></div>
-            min
-          </div>
-          <div className="more">
-            <button className="morebutton">
-              Full Menu <i className="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </div> 
-      </div> */}
-        </section>
-      </div>
-      <div className="bottom-justified">
-        <div className="welcome"> Barking </div>
-        <div className="horizontal-scroll">
-          {
-            data.map((content, index) => {
-              return (
-                <div key={index} className="content-card">
-                  {/* <div className="videos"> */}
-                  <div className="video-responsive">
-                    <iframe
-                      width="426.5"
-                      height="240"
-                      src={getEmbedURL(content['URL'])}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="Embedded youtube"
-                    />
-                  </div>
-                  {/* <div className="description">What to feed your dog today!</div> */}
-                </div>
-              )
-            })
-          }
-        </div>
-        
-      </div>
-      <div className="bottom-justified">
-        <div className="welcome"> Barking </div>
-        <div className="horizontal-scroll">
-          {
-            data.map((content, index) => {
-              return (
-                <div key={index} className="content-card">
-                  {/* <div className="videos"> */}
-                  <div className="video-responsive">
-                    <iframe
-                      width="426.5"
-                      height="240"
-                      src={getEmbedURL(content['URL'])}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="Embedded youtube"
-                    />
-                  </div>
-                  {/* <div className="description">What to feed your dog today!</div> */}
-                </div>
-              )
-            })
-          }
-        </div>
-        
-      </div>
-      <div className="bottom-justified">
-      <div className="welcome"> Barking </div>
-        <div className="horizontal-scroll">
-        
-          {
-            data.map((content, index) => {
-              return (
-                <div key={index} className="content-card">
-                  {/* <div className="videos"> */}
-                  <div className="video-responsive">
-                    <iframe
-                      // width="426.5"
-                      // height="240"
-                      width="284.33"
-                      height="160"
-                      src={getEmbedURL(content['URL'])}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="Embedded youtube"
-                    />
-                  </div>
-                  {/* <div className="description">What to feed your dog today!</div> */}
-                </div>
-              )
-            })
-          }
-        </div>
-        
-      </div>
-    </div>
+        );
+      })}
+    </>
   );
 };
