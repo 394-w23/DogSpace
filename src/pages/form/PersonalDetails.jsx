@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../Form.css';
 import { Avatar, FormControl, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material';
-import { pink } from '@mui/material/colors';
+import { shadows } from '@mui/system';
 
 const PersonalDetails = ({ nextStep, handleChange, values }) => {
   const Continue = (e) => {
@@ -9,10 +9,27 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
     nextStep();
   };
 
+  const labelStyle = {
+    color: '#2c604d',
+    fontSize: '0.8rem',
+    fontStyle: 'bold',
+    width: '100%'
+  };
+
   return (
     <div className="formContainer">
-      <h1>Welcome to DogSpace</h1>
-      <p>Please add your profile.</p>
+      <br></br>
+      <div className="center">
+        <div className="circleContainer">
+          <div className="circle current"></div>
+          <div className="circle other"></div>
+          <div className="circle other"></div>
+          <div className="circle other"></div>
+          <div className="circle other"></div>
+        </div>
+      </div>
+      <h1>Welcome to ZenDog</h1>
+      <h6>Please add your profile.</h6>
       <br></br>
       <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
         <div className="avatar">
@@ -21,20 +38,21 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
         <br></br>
         <TextField
           type="text"
-          variant="filled"
           placeholder="Name"
+          variant="filled"
           value={values.name}
           onChange={handleChange('name')}
           hiddenLabel
           InputProps={{
             style: {
-              background: '#d9d9d9',
+              background: 'white',
               fontSize: '0.8rem',
               width: '90%',
               marginLeft: '5%',
               display: 'flex',
               alignText: 'center',
-              borderRadius: '0'
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5'
             },
             disableUnderline: true
           }}
@@ -49,13 +67,14 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
           hiddenLabel
           InputProps={{
             style: {
-              background: '#d9d9d9',
+              background: 'white',
               fontSize: '0.8rem',
               width: '90%',
               marginLeft: '5%',
               display: 'flex',
               alignText: 'center',
-              borderRadius: '0'
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5'
             },
             disableUnderline: true,
           }}
@@ -67,67 +86,62 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
         <RadioGroup value={values.gender} onChange={handleChange('gender')}>
           <FormControlLabel
             value="female"
-            control={<Radio sx={{ color: '#7e7e7e', '&.Mui-checked': { color: '#7e7e7e' } }} />}
-            label="Female"
+            control={<Radio sx={{ color: '#d9d9d9', '&.Mui-checked': { color: '#d9d9d9' } }} />}
+            label={<h6 style={labelStyle}>Female</h6>}
             labelPlacement="start"
             sx={{
-              fontSize: '0.8rem',
               width: '90%',
               display: 'flex',
               justifyContent: 'space-between',
               marginLeft: '5%',
-              borderBottom: '2px solid #d9d9d9'
+              borderBottom: '2px solid #dfdfdf'
             }}
           />
           <FormControlLabel
             value="male"
-            control={<Radio sx={{ color: '#7e7e7e', '&.Mui-checked': { color: '#7e7e7e' } }} />}
-            label="Male"
+            control={<Radio sx={{ color: '#d9d9d9', '&.Mui-checked': { color: '#d9d9d9' } }} />}
+            label={<h6 style={labelStyle}>Male</h6>}
             labelPlacement="start"
             sx={{
-              fontSize: '0.8rem',
               width: '90%',
               display: 'flex',
               justifyContent: 'space-between',
               marginLeft: '5%',
-              borderBottom: '2px solid #d9d9d9'
+              borderBottom: '2px solid #dfdfdf'
             }}
           />
           <FormControlLabel
             value="non-binary"
-            control={<Radio sx={{ color: '#7e7e7e', '&.Mui-checked': { color: '#7e7e7e' } }} />}
-            label="Non-binary"
+            control={<Radio sx={{ color: '#d9d9d9', '&.Mui-checked': { color: '#d9d9d9' } }} />}
+            label={<h6 style={labelStyle}>Non-binary</h6>}
             labelPlacement="start"
             sx={{
-              fontSize: '0.8rem',
               width: '90%',
               display: 'flex',
               justifyContent: 'space-between',
               marginLeft: '5%',
-              borderBottom: '2px solid #d9d9d9'
+              borderBottom: '2px solid #dfdfdf'
             }}
           />
           <FormControlLabel
             value="rather not to say"
-            control={<Radio sx={{ color: '#7e7e7e', '&.Mui-checked': { color: '#7e7e7e' } }} />}
-            label="Rather not to say"
+            control={<Radio sx={{ color: '#d9d9d9', '&.Mui-checked': { color: '#d9d9d9' } }} />}
+            label={<h6 style={labelStyle}>Rather not to say</h6>}
             labelPlacement="start"
             sx={{
-              fontSize: '0.8rem',
               width: '90%',
               display: 'flex',
               justifyContent: 'space-between',
               marginLeft: '5%',
-              borderBottom: '2px solid #d9d9d9'
+              borderBottom: '2px solid #dfdfdf'
             }}
           />
           <FormControlLabel
             value="other"
-            control={<Radio sx={{ color: '#7e7e7e', '&.Mui-checked': { color: '#7e7e7e' } }} />}
-            label="Other"
+            control={<Radio sx={{ color: '#d9d9d9', '&.Mui-checked': { color: '#d9d9d9' } }} />}
+            label={<h6 style={labelStyle}>Other</h6>}
             labelPlacement="start"
             sx={{
-              fontSize: '0.8rem',
               width: '90%',
               display: 'flex',
               justifyContent: 'space-between',
@@ -136,7 +150,7 @@ const PersonalDetails = ({ nextStep, handleChange, values }) => {
           />
         </RadioGroup>
         <button onClick={Continue} className="nextButton">
-          Next
+          <b>Next</b>
         </button>
       </FormControl>
     </div>

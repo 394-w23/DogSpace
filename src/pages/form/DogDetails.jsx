@@ -181,14 +181,25 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
   ];
 
   return (
-    <div>
+    <div className="formContainer">
+      <br></br>
+      <div className="center">
+        <div className="circleContainer">
+          <div className="circle other"></div>
+          <div className="circle current"></div>
+          <div className="circle other"></div>
+          <div className="circle other"></div>
+          <div className="circle other"></div>
+        </div>
+      </div>
       <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
         <h1 className="dogProfileH1">
-          Set up <br></br>your dog profile
+          Set up your dog profile
         </h1>
         <div className="avatar">
           <Avatar sx={{ width: '45vw', height: '45vw' }} />
         </div>
+        <br></br>
         <br></br>
         <TextField
           type="text"
@@ -199,13 +210,14 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
           hiddenLabel
           InputProps={{
             style: {
-              background: '#d9d9d9',
+              background: 'white',
               fontSize: '0.8rem',
               width: '90%',
               marginLeft: '5%',
               display: 'flex',
               alignText: 'center',
-              borderRadius: '0'
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5'
             },
             disableUnderline: true
           }}
@@ -213,8 +225,10 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
         <h2>Breed</h2>
         <Autocomplete
           value={values.dogBreed}
-          onChange={handleChange('dogBreed')}
+          onChange={(e, newVal) => {handleChange('dogBreed')(newVal)}}
           options={dogBreeds}
+          disableClearable
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           getOptionLabel={(option) => (option.label ? option.label : '')}
           style={{ fontSize: '1rem', width: '90%', marginLeft: '5%', background: '#d9d9d9' }}
           renderInput={(params) => (
@@ -242,13 +256,14 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
           onChange={handleChange('dogBirthday')}
           InputProps={{
             style: {
-              background: '#d9d9d9',
+              background: 'white',
               fontSize: '0.8rem',
               width: '90%',
               marginLeft: '5%',
               display: 'flex',
               alignText: 'center',
-              borderRadius: '0'
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5'
             },
             disableUnderline: true
           }}
@@ -256,36 +271,41 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
         <h2>Sex</h2>
         <ButtonGroup variant="containerPrimary" style={{ justifyContent: 'center' }}>
           <Button
-            value={values.dogGender}
+            value={'female'}
             onClick={handleChange('dogGender')}
             style={{
-              background: '#d9d9d9',
-              marginRight: '2%',
+              background: 'white',
+              fontSize: '0.8rem',
               width: '43%',
-              borderRadius: '0',
+              display: 'flex',
+              alignText: 'center',
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5',
+              textTransform: 'none',
               paddingTop: '4%',
-              paddingBottom: '4%',
-              fontSize: '0.8rem'
+              paddingBottom: '4%'
             }}>
-            Female
+            <b>Female</b>
           </Button>
           <Button
-            value={values.dogGender}
+            value={'male'}
             onClick={handleChange('dogGender')}
             style={{
-              background: '#d9d9d9',
-              marginLeft: '2%',
+              background: 'white',
+              fontSize: '0.8rem',
               width: '43%',
-              borderRadius: '0',
-              paddingTop: '4%',
-              paddingBottom: '4%',
-              fontSize: '0.8rem'
+              marginLeft: '5%',
+              display: 'flex',
+              alignText: 'center',
+              borderRadius: '8px',
+              boxShadow: 'inset 0 2px 8px #e5e5e5',
+              textTransform: 'none'
             }}>
-            Male
+            <b>Male</b>
           </Button>
         </ButtonGroup>
         <button onClick={Continue} className="nextButton">
-          Next
+          <b>Next</b>
         </button>
       </FormControl>
     </div>

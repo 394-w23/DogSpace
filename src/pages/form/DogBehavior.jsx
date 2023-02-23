@@ -1,15 +1,18 @@
 import React from 'react';
 import '../../Form.css';
-import { FormControl, Grid, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { FormControl,  
+  Grid,
+  ToggleButtonGroup,
+  ToggleButton} from '@mui/material';
 
-const DogIssues = ({ nextStep, handleChange, values }) => {
+const DogBehavior = ({ nextStep, handleChange, values }) => {
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
   };
 
   const handleButtonColor = (event, newButtonValue) => {
-    if (values.dogIssues.includes(newButtonValue)) {
+    if (values.dogBehavior.includes(newButtonValue)) {
       // If the button is already selected, set the color back to the default color
       return {
         background: '#d9d9d9',
@@ -28,12 +31,19 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
     <>
       <h1>What are your dog's issues?</h1>
       <FormControl component="fieldset" variant="standard" sx={{ width: '100%', margin: '0' }}>
-        <Grid container spacing={2} sx={{ width: '100%', marginLeft: '-1.5%' }} justify="center" alignItems="center">
+        <Grid
+          container
+          spacing={2}
+          sx={{ width: '100%', marginLeft: '-1.5%' }}
+          justify="center"
+          alignItems="center">
           <Grid item xs={6}>
             <ToggleButtonGroup
               orientation="vertical"
-              value={values.dogIssues}
-              onChange={handleChange('dogIssues')}>
+              value={values.dogBehavior}
+              onChange={(e, newValue) => {
+                handleChange('dogBehavior')(newValue);
+              }}>
               <ToggleButton
                 value="barking"
                 sx={{
@@ -48,10 +58,11 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
                   aspectRatio: '1/1',
                   width: '150px'
                 }}
-                onClick={(event) => {
-                  handleChange('dogIssues');
-                  handleButtonColor(event, 'barking');
-                }}>
+                // onClick={(event) => {
+                //   handleChange((e, newValue) => {
+                //     'dogIssues');
+                //   handleButtonColor(event, 'barking');
+              >
                 Barking
               </ToggleButton>
               <ToggleButton
@@ -70,7 +81,7 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
                 }}>
                 Crying
               </ToggleButton>
-              <ToggleButton
+              {/* <ToggleButton
                 value="howling"
                 sx={{
                   background: '#d9d9d9',
@@ -149,14 +160,12 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
                   width: '150px'
                 }}>
                 Refusing to eat
-              </ToggleButton>
+              </ToggleButton> */}
             </ToggleButtonGroup>
           </Grid>
           <Grid item xs={6}>
-            <ToggleButtonGroup
-              orientation="vertical"
-              value={values.dogIssues}
-              onChange={handleChange('dogIssues')}>
+            <ToggleButtonGroup orientation="vertical" value={values.dogIssues}>
+              {/* // onChange={handleChange('dogIssues')}> */}
               <ToggleButton
                 value="potty training"
                 sx={{
@@ -189,7 +198,7 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
                 }}>
                 Aggression
               </ToggleButton>
-              <ToggleButton
+              {/* <ToggleButton
                 value="licking body"
                 sx={{
                   background: '#d9d9d9',
@@ -268,7 +277,7 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
                   width: '150px'
                 }}>
                 Refusing to play
-              </ToggleButton>
+              </ToggleButton> */}
             </ToggleButtonGroup>
           </Grid>
         </Grid>
@@ -281,4 +290,4 @@ const DogIssues = ({ nextStep, handleChange, values }) => {
   );
 };
 
-export default DogIssues;
+export default DogBehavior;
