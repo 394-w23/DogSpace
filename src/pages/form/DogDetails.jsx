@@ -2,7 +2,12 @@ import React from 'react';
 import '../../Form.css';
 import { Autocomplete, Avatar, Button, ButtonGroup, FormControl, TextField } from '@mui/material';
 
-const DogDetails = ({ nextStep, handleChange, values }) => {
+const DogDetails = ({ previousStep, nextStep, handleChange, values }) => {
+  const GoBack = (e) => {
+    e.preventDefault();
+    previousStep();
+  };
+  
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
@@ -189,16 +194,14 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
           <div className="circle current"></div>
           <div className="circle other"></div>
           <div className="circle other"></div>
-          <div className="circle other"></div>
         </div>
       </div>
       <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
-        <h1 className="dogProfileH1">
-          Set up your dog profile
-        </h1>
+        <h1 className="dogProfileH1">Set up your dog profile</h1>
         <div className="avatar">
           <Avatar sx={{ width: '45vw', height: '45vw' }} />
         </div>
+        <h6 className="upload"><b>Upload your dog photo</b></h6>
         <br></br>
         <br></br>
         <TextField
@@ -225,24 +228,39 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
         <h2>Breed</h2>
         <Autocomplete
           value={values.dogBreed}
-          onChange={(e, newVal) => {handleChange('dogBreed')(newVal)}}
+          onChange={(e, newVal) => {
+            handleChange('dogBreed')(newVal);
+          }}
           options={dogBreeds}
           disableClearable
           isOptionEqualToValue={(option, value) => option.id === value.id}
           getOptionLabel={(option) => (option.label ? option.label : '')}
-          style={{ fontSize: '1rem', width: '90%', marginLeft: '5%', background: '#d9d9d9' }}
+          sx={{
+            fontSize: '1rem',
+            width: '90%',
+            marginLeft: '5%',
+            background: 'white',
+            border: 'none',
+            '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+              border: 'none'
+            }
+          }}
           renderInput={(params) => (
             <TextField
               {...params}
-              variant="filled"
               hiddenLabel
-              sx={{
-                background: '#d9d9d9',
-                fontSize: '0.8rem',
-                display: 'flex',
-                alignText: 'center',
-                borderRadius: '0',
-                outline: 'none'
+              InputProps={{
+                ...params.InputProps,
+                style: {
+                  background: 'white',
+                  fontSize: '0.8rem',
+                  display: 'flex',
+                  alignText: 'center',
+                  border: 'none',
+                  borderRadius: '8px',
+                  boxShadow: 'inset 0 2px 8px #e5e5e5',
+                  outline: 'none'
+                }
               }}
             />
           )}
@@ -268,7 +286,7 @@ const DogDetails = ({ nextStep, handleChange, values }) => {
             disableUnderline: true
           }}
         />
-        <h2>Sex</h2>
+        <h2>Gender</h2>
         <ButtonGroup variant="containerPrimary" style={{ justifyContent: 'center' }}>
           <Button
             value={'female'}

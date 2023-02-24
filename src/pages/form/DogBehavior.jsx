@@ -1,35 +1,46 @@
 import React from 'react';
 import '../../Form.css';
-import { FormControl,  
-  Grid,
-  ToggleButtonGroup,
-  ToggleButton} from '@mui/material';
+import { FormControl, Grid, ToggleButtonGroup, ToggleButton } from '@mui/material';
 
-const DogBehavior = ({ nextStep, handleChange, values }) => {
+const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
+  const GoBack = (e) => {
+    e.preventDefault();
+    previousStep();
+  };
+
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
   };
 
-  const handleButtonColor = (event, newButtonValue) => {
-    if (values.dogBehavior.includes(newButtonValue)) {
-      // If the button is already selected, set the color back to the default color
-      return {
-        background: '#d9d9d9',
-        color: 'initial'
-      };
-    } else {
-      // If the button is not selected, set the color to the selected color
-      return {
-        background: '#3f51b5',
-        color: '#fff'
-      };
-    }
-  };
+  // const handleButtonColor = (event, newButtonValue) => {
+  //   console.log('pressed button ' + newButtonValue);
+  //   if (selected.includes(newButtonValue)) {
+  //     // If the button is already selected, set the color back to the default color
+  //     return {
+  //       background: '#d9d9d9'
+  //     };
+  //   } else {
+  //     // If the button is not selected, set the color to the selected color
+  //     return {
+  //       background: '#d0ebc7'
+  //     };
+  //   }
+  // };
 
   return (
-    <>
-      <h1>What are your dog's issues?</h1>
+    <div className="formContainer">
+      <br></br>
+      <div className="center">
+        <div className="circleContainer">
+          <div className="circle other"></div>
+          <div className="circle other"></div>
+          <div className="circle current"></div>
+          <div className="circle other"></div>
+        </div>
+      </div>
+      <h1>Behavior</h1>
+      <br></br>
       <FormControl component="fieldset" variant="standard" sx={{ width: '100%', margin: '0' }}>
         <Grid
           container
@@ -47,7 +58,7 @@ const DogBehavior = ({ nextStep, handleChange, values }) => {
               <ToggleButton
                 value="barking"
                 sx={{
-                  background: '#d9d9d9',
+                  backgroundColor: '#d9d9d9',
                   mb: 2,
                   '&.MuiToggleButtonGroup-grouped': {
                     borderRadius: '8px !important',
@@ -58,11 +69,7 @@ const DogBehavior = ({ nextStep, handleChange, values }) => {
                   aspectRatio: '1/1',
                   width: '150px'
                 }}
-                // onClick={(event) => {
-                //   handleChange((e, newValue) => {
-                //     'dogIssues');
-                //   handleButtonColor(event, 'barking');
-              >
+                >
                 Barking
               </ToggleButton>
               <ToggleButton
@@ -281,12 +288,11 @@ const DogBehavior = ({ nextStep, handleChange, values }) => {
             </ToggleButtonGroup>
           </Grid>
         </Grid>
-        {/* need to implement the finish button to upload to firebase? */}
         <button onClick={Continue} className="nextButton">
-          Finish
+          <b>Next</b>
         </button>
       </FormControl>
-    </>
+    </div>
   );
 };
 
