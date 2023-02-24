@@ -8,14 +8,12 @@ import { signInWithGoogle } from '../utils/firebase';
 export const Authenticate = () => {
   const { user, profile } = useAuthValue();
   const navigate = useNavigate();
-  console.log({ profile });
+
   useEffect(() => {
     if (user && profile !== undefined) {
       if (profile === null) {
-        console.log('/signup');
         navigate('/signup');
       } else {
-        console.log('/');
         navigate('/');
       }
     }

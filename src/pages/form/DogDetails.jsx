@@ -2,6 +2,7 @@ import React from 'react';
 import '../../Form.css';
 import { Autocomplete, Avatar, Button, ButtonGroup, FormControl, TextField, IconButton } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 
 const DogDetails = ({ previousStep, nextStep, handleChange, values }) => {
   const GoBack = (e) => {
@@ -188,6 +189,12 @@ const DogDetails = ({ previousStep, nextStep, handleChange, values }) => {
 
   return (
     <div className="formContainer">
+      <br></br>
+      <div className="backButton">
+        <IconButton onClick={GoBack}>
+          <ArrowBackIos />
+        </IconButton>
+      </div>
       <br></br>
       <div className="center">
         <div className="circleContainer">

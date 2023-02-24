@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../Form.css';
-import { Checkbox, FormControl, FormControlLabel, Grid, RadioGroup, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, Grid, IconButton, RadioGroup, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 
 const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
   const GoBack = (e) => {
@@ -23,6 +24,12 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
   return (
     <div className="formContainer">
       <br></br>
+      <div className="backButton">
+        <IconButton onClick={GoBack}>
+          <ArrowBackIos />
+        </IconButton>
+      </div>
+      <br></br>
       <div className="center">
         <div className="circleContainer">
           <div className="circle other"></div>
@@ -37,7 +44,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
         <Grid
           container
           spacing={2}
-          sx={{ width: '100%', marginLeft: '-1.5%' }}
+          sx={{ width: '100%', marginLeft: '0.5%' }}
           justify="center"
           alignItems="center">
           <Grid item xs={6}>
@@ -51,34 +58,61 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 value="dog treat"
                 sx={{
                   backgroundColor: '#d9d9d9',
-                  mb: 2,
+                  mb: 3,
                   '&.MuiToggleButtonGroup-grouped': {
-                    borderRadius: '8px !important',
-                    mx: 1,
+                    borderRadius: '24px !important',
+                    mx: 0,
                     border: 'none'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
-                  width: '150px'
+                  width: '150px',
+                  textTransform: 'none',
+                  color: 'black'
                 }}
-              >
-                Dog Treat
+                >
+                <div className="toggleButton">
+                  <img className="toggleButtonImage" src="src\svgs\treats.svg" alt="dog treat" />
+                  <b>Dog Treat</b>
+                </div>
               </ToggleButton>
               <ToggleButton
                 value="crate"
                 sx={{
-                  background: '#d9d9d9',
-                  mb: 2,
+                  backgroundColor: '#d9d9d9',
+                  mb: 3,
                   '&.MuiToggleButtonGroup-grouped': {
-                    borderRadius: '8px !important',
-                    mx: 1,
+                    borderRadius: '24px !important',
+                    mx: 0,
                     border: 'none'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
-                  width: '150px'
-                }}>
-                Crate
+                  width: '150px',
+                  textTransform: 'none',
+                  color: 'black'
+                }}
+                >
+                <div className="toggleButton">
+                  <img className="toggleButtonImage" src="src\svgs\crate.svg" alt="crate" />
+                  <b>Crate</b>
+                </div>
               </ToggleButton>
             </ToggleButtonGroup>
           </Grid>
@@ -92,34 +126,62 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
               <ToggleButton
                 value="toy"
                 sx={{
-                  background: '#d9d9d9',
-                  mb: 2,
+                  backgroundColor: '#d9d9d9',
+                  mb: 3,
                   '&.MuiToggleButtonGroup-grouped': {
-                    borderRadius: '8px !important',
-                    mx: 1,
+                    borderRadius: '24px !important',
+                    mx: 0,
                     border: 'none'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
-                  width: '150px'
-                }}>
-                Toy
+                  width: '150px',
+                  textTransform: 'none',
+                  color: 'black'
+                }}
+                >
+                <div className="toggleButton">
+                  <img className="toggleButtonImage" src="src\svgs\toys.svg" alt="toy" />
+                  <b>Toy</b>
+                </div>
               </ToggleButton>
               <ToggleButton
                 value="electric collar"
                 sx={{
-                  background: '#d9d9d9',
-                  mb: 2,
+                  backgroundColor: '#d9d9d9',
+                  mb: 3,
                   '&.MuiToggleButtonGroup-grouped': {
-                    borderRadius: '8px !important',
-                    mx: 1,
+                    borderRadius: '24px !important',
+                    mx: 0,
                     border: 'none'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
-                  width: '150px'
-                }}>
-                Electric collar
+                  width: '150px',
+                  textTransform: 'none',
+                  color: 'black'
+                }}
+                >
+                <div className="toggleButton">
+                  <img className="toggleButtonImage" src="src\svgs\electric collar.svg" alt="electric collar" />
+                  <b>Electric Collar</b>
+                </div>
               </ToggleButton>
             </ToggleButtonGroup>
           </Grid>
@@ -133,6 +195,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
           onChange={(e, newValue) => {
             handleChange('dogTrainingPreference')(newValue);
           }}
+          // onChange={handleChange('dogTrainingPreference')}
         >
           <FormControlLabel
             value="positive reinforcement training"

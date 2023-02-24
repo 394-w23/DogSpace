@@ -24,6 +24,7 @@ const PersonalDetails = ({ previousStep, nextStep, handleChange, values }) => {
   return (
     <div className="formContainer">
       <br></br>
+      <br></br>
       <div className="center">
         <div className="circleContainer">
           <div className="circle current"></div>

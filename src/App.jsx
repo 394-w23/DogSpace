@@ -9,11 +9,12 @@ import { AuthProvider } from './components/AuthContext';
 import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
 import Form from './pages/form/Form';
 import { Authenticate } from './pages/Authenticate';
-import { getUser, useAuthState } from './utils/firebase';
+import { getProfile, useAuthState } from './utils/firebase';
 
 const App = () => {
   const [user] = useAuthState();
   const [profile, setProfile] = useState(undefined);
+  const [dogProfile, setDogProfile] = useState(undefined);
 
   useEffect(() => {
     if (!user) {
@@ -21,9 +22,13 @@ const App = () => {
       return;
     }
     const { email } = user;
-    getUser(email).then((users) => {
+    getProfile('users', email).then((users) => {
       console.log(users);
       setProfile(users.length === 0 ? null : users[0]);
+    });
+    getProfile('dogs', email).then((dogs) => {
+      console.log(dogs);
+      setDogProfile(dogs.length === 0 ? null : dogs[0]);
     });
   }, [user]);
 
@@ -62,7 +67,7 @@ const App = () => {
   ]);
 
   return (
-    <AuthProvider value={{ user, profile }}>
+    <AuthProvider value={{ user, profile, dogProfile }}>
       <RouterProvider router={router} />
     </AuthProvider>
   );

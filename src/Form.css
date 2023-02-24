@@ -46,6 +46,26 @@ div {
     background: transparent;
 }
 
+.backButton {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.toggleButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.toggleButtonImage {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 0.5rem;
+}
+
 h1 {
     text-align: left;
     font-size: 1.8rem;
