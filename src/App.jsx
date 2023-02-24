@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Home } from './pages/Home';
 import { NavBar } from './NavBar.jsx';
 import { Profile } from './pages/Profile';
 import { Category } from './pages/Category';
 import { ErrorPage } from './pages/ErrorPage';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './components/AuthContext';
+import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
 import Form from './pages/form/Form';
 import { Authenticate } from './pages/Authenticate';
-import { useAuthState } from './utils/firebase';
+import { getUser, useAuthState } from './utils/firebase';
 
-// will need to add logic to only show form when it hasn't been filled out, in the home page
 const App = () => {
   const [user] = useAuthState();
-  console.log(user);
-  if (!user) return <Authenticate />;
+  const [profile, setProfile] = useState(undefined);
+
+  useEffect(() => {
+    if (!user) {
+      setProfile(undefined);
+      return;
+    }
+    const { email } = user;
+    getUser(email).then((users) => {
+      console.log(users);
+      setProfile(users.length === 0 ? null : users[0]);
+    });
+  }, [user]);
 
   const router = createBrowserRouter([
     {
       path: '/',
-      // element: <Form />,
-      element: <NavBar user={user} />,
+      element: user === null ? <Navigate to="/signin" /> : <NavBar user={user} />,
       errorElement: <ErrorPage />,
       children: [
         {
@@ -44,10 +54,18 @@ const App = () => {
     {
       path: '/signup',
       element: <Form />
+    },
+    {
+      path: '/signin',
+      element: <Authenticate />
     }
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider value={{ user, profile }}>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 };
 
 export default App;

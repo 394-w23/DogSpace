@@ -1,8 +1,26 @@
-import { Button } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthValue } from '../components/AuthContext';
 import { ZenDogLogo } from '../svgs/logo_zendog';
 import { signInWithGoogle } from '../utils/firebase';
 
 export const Authenticate = () => {
+  const { user, profile } = useAuthValue();
+  const navigate = useNavigate();
+  console.log({ profile });
+  useEffect(() => {
+    if (user && profile !== undefined) {
+      if (profile === null) {
+        console.log('/signup');
+        navigate('/signup');
+      } else {
+        console.log('/');
+        navigate('/');
+      }
+    }
+  }, [user, profile]);
+
   return (
     <div
       style={{
@@ -14,7 +32,10 @@ export const Authenticate = () => {
         justifyContent: 'flex-end',
         alignItems: 'center'
       }}>
-      <div style={{ width: '70vw', backgroundColor: '#AAF1CF', maxWidth: 500 }}>
+      {user && profile === undefined ? (
+        <LinearProgress style={{ width: '100%', position: 'fixed', top: 0 }} />
+      ) : undefined}
+      <div style={{ width: '70vw', backgroundColor: '#AAF1CF', maxWidth: 350 }}>
         <ZenDogLogo fill="#11614D" />
       </div>
       <p
@@ -33,7 +54,7 @@ export const Authenticate = () => {
           color: 'white',
           width: '80vw',
           maxWidth: 300,
-          marginBottom: '3.5rem'
+          marginBottom: '16vh'
         }}
         size="large"
         onClick={signInWithGoogle}

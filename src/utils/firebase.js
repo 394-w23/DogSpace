@@ -4,13 +4,11 @@ import { initializeApp } from 'firebase/app';
 import {
   initializeFirestore,
   collection,
-  Timestamp,
   addDoc,
-  orderBy,
   query,
   onSnapshot,
-  connectFirestoreEmulator,
-  where
+  where,
+  getDocs
 } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
@@ -29,6 +27,7 @@ const app = initializeApp(firebaseConfig);
 const db = initializeFirestore(app, {
   experimentalForceLongPolling: true
 });
+const auth = getAuth(app);
 
 // if (!window.EMULATION && import.meta.env.PROD !== true) {
 //   connectFirestoreEmulator(db, '127.0.0.1', 8080);
@@ -37,7 +36,10 @@ const db = initializeFirestore(app, {
 // }
 
 export async function submitForm(state) {
+  const { email } = await auth.currentUser;
+  console.log(state.dogGender);
   try {
+    if (!email) throw Error();
     const dogProfileRef = await addDoc(collection(db, 'dogs'), {
       age: state.age,
       birthday: state.dogBirthday,
@@ -47,12 +49,28 @@ export async function submitForm(state) {
       name: state.dogName
       //todo: tools and training preference, user
     });
-    console.log('Document written with ID: ', waitingTimesRef.id);
+    const userProfileRef = await addDoc(collection(db, 'users'), {
+      age: state.age,
+      gender: state.gender,
+      name: state.name,
+      email: email
+      //todo: tools and training preference, user
+    });
+    console.log('Document written with ID: ', dogProfileRef.id);
   } catch (e) {
     console.error('Error adding document: ', e);
   }
   return 0;
 }
+
+export const getUser = async (email) => {
+  const itemsColRef = collection(db, 'users');
+  const dataQuery = query(itemsColRef, where('email', '==', email));
+  const querySnapshot = await getDocs(dataQuery);
+  return querySnapshot.docs.map((doc) => {
+    return doc.data();
+  });
+};
 
 export const useContentDb = (contentType, categories) => {
   const itemsColRef = collection(db, 'content');
@@ -67,6 +85,7 @@ export const useContentDb = (contentType, categories) => {
 export const useUserDb = (email) => {
   const itemsColRef = collection(db, 'users');
   const dataQuery = query(itemsColRef, where('email', '==', email));
+  console.log(dataQuery);
   return useDbData(dataQuery);
 };
 
@@ -80,11 +99,6 @@ export const useDbData = (query) => {
       query,
       (querySnapshot) => {
         const updatedData = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-        // var contentTypes = {
-        //   "video":  [],
-        //   "article": []
-        // }
-        // Parse data here
         setData(updatedData);
         setLoading(false);
       },
@@ -100,13 +114,13 @@ export const useDbData = (query) => {
 };
 
 export const signInWithGoogle = () => {
-  signInWithPopup(getAuth(app), new GoogleAuthProvider());
+  signInWithPopup(auth, new GoogleAuthProvider());
 };
 
 export const useAuthState = () => {
   const [user, setUser] = useState();
 
-  useEffect(() => onAuthStateChanged(getAuth(app), setUser), []);
+  useEffect(() => onAuthStateChanged(auth, setUser), []);
 
   return [user];
 };
