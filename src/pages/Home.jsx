@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PetsIcon from '@mui/icons-material/Pets';
-import { useContentDb } from '../utils/firebase';
+import { getPhotoUrl, useContentDb } from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { capitalize, fetchVids } from '../utils/helpers';
 import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
@@ -10,20 +10,25 @@ import { useAuthValue } from '../components/AuthContext';
 
 // import { NavBar } from './NavBar.jsx';
 
-const HARDCODED_CATEGORIES = [
-  'barking',
-  'potty training',
-  'digging',
-  'crying',
-  'howling',
-  'Licking his body'
-];
+const HARDCODED_CATEGORIES = ['barking', 'potty training', 'crying', 'aggression'];
 
 export const Home = () => {
   const [data] = useContentDb('video', HARDCODED_CATEGORIES);
   const { profile, dogProfile } = useAuthValue();
+  const [dogPhoto, setDogPhoto] = useState();
 
-  const [selectedCategories, setSelectedCategories] = useState(HARDCODED_CATEGORIES.slice(0, 3));
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  useEffect(() => {
+    if (dogProfile) {
+      getPhotoUrl('dogs', dogProfile.email).then((photoUrl) => {
+        setDogPhoto(photoUrl);
+      });
+
+      setSelectedCategories(dogProfile['health issues']);
+    }
+  }, [dogProfile]);
+
   // console.log({selectedCategories})
 
   const handleCategoryClick = (id) => {
@@ -40,17 +45,14 @@ export const Home = () => {
       <div className="top" style={{ position: 'sticky', top: 0, zIndex: 3 }}>
         <div className="header">
           <div className="profilepic">
-            <Avatar
-              sx={{ width: '4rem', height: '4rem' }}
-              src="https://i.ibb.co/xSYxBwV/wto1dmblpwy51.png"
-            // src="gs://dogspace-d492c.appspot.com/users/tianzeliu2024@u.northwestern.edu"
-            // src="https://www.scotsman.com/webimg/b25lY21zOmZkOGMxMmRmLWRlOGUtNGM2ZC04NjA1LWU5NzAyOGMyOGJmYzoxNjI3MGQzYS0wMDJkLTQ0MjQtOWRmZi1hYWJiZGYyOTg3MTM=.jpg?crop=61:45,smart&width=800"
-            />
+            <Avatar sx={{ width: '4rem', height: '4rem' }} src={dogPhoto} />
           </div>
           <div className="right">
             <div className="petname"> {dogProfile?.name} </div>
             <div className="petinfo"> Owner: {profile?.name} </div>
-            <div className="petinfo2">{`${dogProfile?.breed} Age: ${dogProfile?.age}`}</div>
+            <div className="petinfo2">{`${dogProfile ? capitalize(dogProfile.breed) : ''} - Age: ${
+              dogProfile?.age
+            }`}</div>
           </div>
         </div>
         <div className="categories">

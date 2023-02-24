@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import {
   initializeFirestore,
   collection,
@@ -45,7 +45,7 @@ export async function submitForm(state) {
     handlePhotoUpload(state.userPhoto, 'users', email);
     handlePhotoUpload(state.dogPhoto, 'dogs', email);
     const dogProfileRef = await addDoc(collection(db, 'dogs'), {
-      owner: email,
+      email: email,
       age: state.age,
       birthday: state.dogBirthday,
       breed: state.dogBreed.value,
@@ -70,12 +70,12 @@ export async function submitForm(state) {
 
 export const handlePhotoUpload = (file, folder, user) => {
   if (!file) {
-    alert("Please upload an image first!");
+    alert('Please upload an image first!');
   }
   const storageRef = ref(storage, `/${folder}/${user}`);
   const uploadTask = uploadBytesResumable(storageRef, file);
   uploadTask.on(
-    "state_changed",
+    'state_changed',
     (err) => console.log(err),
     () => {
       // download url
@@ -84,7 +84,12 @@ export const handlePhotoUpload = (file, folder, user) => {
       });
     }
   );
-}
+};
+
+export const getPhotoUrl = (folder, user) => {
+  const storageRef = ref(storage, `/${folder}/${user}`);
+  return getDownloadURL(storageRef);
+};
 
 export const getProfile = async (col, email) => {
   const itemsColRef = collection(db, col);
@@ -93,6 +98,32 @@ export const getProfile = async (col, email) => {
   return querySnapshot.docs.map((doc) => {
     return doc.data();
   });
+};
+
+export const useProfile = (col, user) => {
+  const [data, setData] = useState(undefined);
+
+  useEffect(() => {
+    if (!user) return;
+    const { email } = user;
+    const itemsColRef = collection(db, col);
+    const dataQuery = query(itemsColRef, where('email', '==', email));
+
+    const unsubscribe = onSnapshot(
+      dataQuery,
+      (querySnapshot) => {
+        const rawData = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+        const formattedData = rawData.length === 0 ? null : rawData[0];
+        setData(formattedData);
+      },
+      (e) => {
+        console.log(e);
+      }
+    );
+    return unsubscribe;
+  }, [col, user]);
+
+  return [data];
 };
 
 export const useContentDb = (contentType, categories) => {
@@ -147,5 +178,3 @@ export const useAuthState = () => {
 
   return [user];
 };
-
-

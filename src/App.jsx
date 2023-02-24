@@ -9,28 +9,12 @@ import { AuthProvider } from './components/AuthContext';
 import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
 import Form from './pages/form/Form';
 import { Authenticate } from './pages/Authenticate';
-import { getProfile, useAuthState } from './utils/firebase';
+import { getProfile, useAuthState, useProfile } from './utils/firebase';
 
 const App = () => {
   const [user] = useAuthState();
-  const [profile, setProfile] = useState(undefined);
-  const [dogProfile, setDogProfile] = useState(undefined);
-
-  useEffect(() => {
-    if (!user) {
-      setProfile(undefined);
-      return;
-    }
-    const { email } = user;
-    getProfile('users', email).then((users) => {
-      console.log(users);
-      setProfile(users.length === 0 ? null : users[0]);
-    });
-    getProfile('dogs', email).then((dogs) => {
-      console.log(dogs);
-      setDogProfile(dogs.length === 0 ? null : dogs[0]);
-    });
-  }, [user]);
+  const [profile] = useProfile('users', user);
+  const [dogProfile] = useProfile('dogs', user);
 
   const router = createBrowserRouter([
     {

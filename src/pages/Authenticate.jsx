@@ -9,6 +9,7 @@ export const Authenticate = () => {
   const { user, profile } = useAuthValue();
   const navigate = useNavigate();
 
+  console.log({ user, profile });
   useEffect(() => {
     if (user && profile !== undefined) {
       if (profile === null) {

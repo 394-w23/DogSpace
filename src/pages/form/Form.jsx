@@ -43,9 +43,9 @@ export default class Form extends Component {
       let reader = new FileReader();
       let file = e.target.files[0];
       reader.onloadend = () => {
-        this.setState({ [input]: file })
-        this.setState({ [`${input}PreviewUrl`]: reader.result })
-      }
+        this.setState({ [input]: file });
+        this.setState({ [`${input}PreviewUrl`]: reader.result });
+      };
       reader.readAsDataURL(file);
       return;
     }
