@@ -12,7 +12,11 @@ export default class Form extends Component {
     name: '',
     age: '',
     gender: '',
+    userPhoto: '',
+    userPhotoPreviewUrl: null,
     dogName: '',
+    dogPhoto: '',
+    dogPhotoPreviewUrl: null,
     dogBreed: '',
     dogBirthday: '',
     dogGender: '',
@@ -35,6 +39,17 @@ export default class Form extends Component {
 
   // handles field changes
   handleChange = (input) => (e) => {
+    if (e.target?.files) {
+      let reader = new FileReader();
+      let file = e.target.files[0];
+      reader.onloadend = () => {
+        this.setState({ [input]: file })
+        this.setState({ [`${input}PreviewUrl`]: reader.result })
+      }
+      reader.readAsDataURL(file);
+      return;
+    }
+
     if (Array.isArray(e) || e.hasOwnProperty('label')) {
       console.log(e);
       this.setState({ [input]: e });
@@ -58,7 +73,9 @@ export default class Form extends Component {
       dogGender,
       dogBehavior,
       dogToolsAtHome,
-      dogTrainingPreference
+      dogTrainingPreference,
+      userPhotoPreviewUrl,
+      dogPhotoPreviewUrl
     } = this.state;
     const values = {
       name,
@@ -70,7 +87,9 @@ export default class Form extends Component {
       dogGender,
       dogBehavior,
       dogToolsAtHome,
-      dogTrainingPreference
+      dogTrainingPreference,
+      userPhotoPreviewUrl,
+      dogPhotoPreviewUrl
     };
 
     switch (step) {

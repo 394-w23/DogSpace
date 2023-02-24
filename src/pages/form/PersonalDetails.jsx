@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../Form.css';
-import { Avatar, FormControl, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material';
+import { Avatar, FormControl, FormControlLabel, Radio, RadioGroup, TextField, IconButton } from '@mui/material';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 const PersonalDetails = ({ previousStep, nextStep, handleChange, values }) => {
   const GoBack = (e) => {
@@ -36,7 +37,19 @@ const PersonalDetails = ({ previousStep, nextStep, handleChange, values }) => {
       <br></br>
       <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
         <div className="avatar">
-          <Avatar sx={{ width: '45vw', height: '45vw' }} />
+          <Avatar sx={{ width: '45vw', height: '45vw' }} src={values.userPhotoPreviewUrl} />
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="profile-photo-upload"
+            type="file"
+            onChange={handleChange('userPhoto')}
+          />
+          <label htmlFor="profile-photo-upload">
+            <IconButton component="span">
+              <PhotoCamera />
+            </IconButton>
+          </label>
         </div>
         <h6 className="upload"><b>Upload your photo</b></h6>
         <br></br>

@@ -41,7 +41,8 @@ export const Home = () => {
             <Avatar
               sx={{ width: '4rem', height: '4rem' }}
               src="https://i.ibb.co/xSYxBwV/wto1dmblpwy51.png"
-              // src="https://www.scotsman.com/webimg/b25lY21zOmZkOGMxMmRmLWRlOGUtNGM2ZC04NjA1LWU5NzAyOGMyOGJmYzoxNjI3MGQzYS0wMDJkLTQ0MjQtOWRmZi1hYWJiZGYyOTg3MTM=.jpg?crop=61:45,smart&width=800"
+            // src="gs://dogspace-d492c.appspot.com/users/tianzeliu2024@u.northwestern.edu"
+            // src="https://www.scotsman.com/webimg/b25lY21zOmZkOGMxMmRmLWRlOGUtNGM2ZC04NjA1LWU5NzAyOGMyOGJmYzoxNjI3MGQzYS0wMDJkLTQ0MjQtOWRmZi1hYWJiZGYyOTg3MTM=.jpg?crop=61:45,smart&width=800"
             />
           </div>
           <div className="right">

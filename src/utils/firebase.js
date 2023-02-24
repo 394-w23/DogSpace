@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {
   initializeFirestore,
   collection,
@@ -28,6 +29,7 @@ const db = initializeFirestore(app, {
   experimentalForceLongPolling: true
 });
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 // if (!window.EMULATION && import.meta.env.PROD !== true) {
 //   connectFirestoreEmulator(db, '127.0.0.1', 8080);
@@ -40,6 +42,8 @@ export async function submitForm(state) {
   console.log(state.dogGender);
   try {
     if (!email) throw Error();
+    handlePhotoUpload(state.userPhoto, 'users', email);
+    handlePhotoUpload(state.dogPhoto, 'dogs', email);
     const dogProfileRef = await addDoc(collection(db, 'dogs'), {
       age: state.age,
       birthday: state.dogBirthday,
@@ -61,6 +65,24 @@ export async function submitForm(state) {
     console.error('Error adding document: ', e);
   }
   return 0;
+}
+
+export const handlePhotoUpload = (file, folder, user) => {
+  if (!file) {
+    alert("Please upload an image first!");
+  }
+  const storageRef = ref(storage, `/${folder}/${user}`);
+  const uploadTask = uploadBytesResumable(storageRef, file);
+  uploadTask.on(
+    "state_changed",
+    (err) => console.log(err),
+    () => {
+      // download url
+      getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+        console.log(url);
+      });
+    }
+  );
 }
 
 export const getUser = async (email) => {
@@ -124,3 +146,5 @@ export const useAuthState = () => {
 
   return [user];
 };
+
+

@@ -1,13 +1,14 @@
 import React from 'react';
 import '../../Form.css';
-import { Autocomplete, Avatar, Button, ButtonGroup, FormControl, TextField } from '@mui/material';
+import { Autocomplete, Avatar, Button, ButtonGroup, FormControl, TextField, IconButton } from '@mui/material';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 const DogDetails = ({ previousStep, nextStep, handleChange, values }) => {
   const GoBack = (e) => {
     e.preventDefault();
     previousStep();
   };
-  
+
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
@@ -199,7 +200,19 @@ const DogDetails = ({ previousStep, nextStep, handleChange, values }) => {
       <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
         <h1 className="dogProfileH1">Set up your dog profile</h1>
         <div className="avatar">
-          <Avatar sx={{ width: '45vw', height: '45vw' }} />
+          <Avatar sx={{ width: '45vw', height: '45vw' }} src={values.dogPhotoPreviewUrl} />
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="dog-photo-upload"
+            type="file"
+            onChange={handleChange('dogPhoto')}
+          />
+          <label htmlFor="dog-photo-upload">
+            <IconButton component="span">
+              <PhotoCamera />
+            </IconButton>
+          </label>
         </div>
         <h6 className="upload"><b>Upload your dog photo</b></h6>
         <br></br>
