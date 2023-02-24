@@ -13,21 +13,6 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
     nextStep();
   };
 
-  // const handleButtonColor = (event, newButtonValue) => {
-  //   console.log('pressed button ' + newButtonValue);
-  //   if (selected.includes(newButtonValue)) {
-  //     // If the button is already selected, set the color back to the default color
-  //     return {
-  //       background: '#d9d9d9'
-  //     };
-  //   } else {
-  //     // If the button is not selected, set the color to the selected color
-  //     return {
-  //       background: '#d0ebc7'
-  //     };
-  //   }
-  // };
-
   return (
     <div className="formContainer">
       <br></br>
@@ -45,7 +30,7 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
         <Grid
           container
           spacing={2}
-          sx={{ width: '100%', marginLeft: '-1.5%' }}
+          sx={{ width: '100%', marginLeft: '0.5%' }}
           justify="center"
           alignItems="center">
           <Grid item xs={6}>
@@ -54,16 +39,26 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
               value={values.dogBehavior}
               onChange={(e, newValue) => {
                 handleChange('dogBehavior')(newValue);
-              }}>
+              }}
+              >
               <ToggleButton
                 value="barking"
+                disableRipple
                 sx={{
                   backgroundColor: '#d9d9d9',
-                  mb: 2,
+                  mb: 3,
                   '&.MuiToggleButtonGroup-grouped': {
-                    borderRadius: '8px !important',
-                    mx: 1,
+                    borderRadius: '24px !important',
+                    mx: 0,
                     border: 'none'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
@@ -75,17 +70,26 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
               <ToggleButton
                 value="crying"
                 sx={{
-                  background: '#d9d9d9',
-                  mb: 2,
+                  backgroundColor: '#d9d9d9',
+                  mb: 3,
                   '&.MuiToggleButtonGroup-grouped': {
-                    borderRadius: '8px !important',
-                    mx: 1,
+                    borderRadius: '24px !important',
+                    mx: 0,
                     border: 'none'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
                   width: '150px'
-                }}>
+                }}
+                >
                 Crying
               </ToggleButton>
               {/* <ToggleButton
@@ -171,38 +175,61 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
             </ToggleButtonGroup>
           </Grid>
           <Grid item xs={6}>
-            <ToggleButtonGroup orientation="vertical" value={values.dogIssues}>
-              {/* // onChange={handleChange('dogIssues')}> */}
+            <ToggleButtonGroup 
+              orientation="vertical"
+              value={values.dogBehavior}
+              onChange={(e, newValue) => {
+                handleChange('dogBehavior')(newValue);
+              }}
+              >
               <ToggleButton
                 value="potty training"
                 sx={{
-                  background: '#d9d9d9',
-                  mb: 2,
+                  backgroundColor: '#d9d9d9',
+                  mb: 3,
                   '&.MuiToggleButtonGroup-grouped': {
-                    borderRadius: '8px !important',
-                    mx: 1,
+                    borderRadius: '24px !important',
+                    mx: 0,
                     border: 'none'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
                   width: '150px'
-                }}>
-                Potty training
+                }}
+                >
+                Potty Training
               </ToggleButton>
               <ToggleButton
                 value="aggression"
                 sx={{
-                  background: '#d9d9d9',
-                  mb: 2,
+                  backgroundColor: '#d9d9d9',
+                  mb: 3,
                   '&.MuiToggleButtonGroup-grouped': {
-                    borderRadius: '8px !important',
-                    mx: 1,
+                    borderRadius: '24px !important',
+                    mx: 0,
                     border: 'none'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: '#d0ebc7',
+                    border: '4px solid #60c35d'
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
                   width: '150px'
-                }}>
+                }}
+                >
                 Aggression
               </ToggleButton>
               {/* <ToggleButton
