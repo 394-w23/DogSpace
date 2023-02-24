@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../Form.css';
-import { Checkbox, FormControl, FormControlLabel, Grid, RadioGroup, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, Grid, IconButton, RadioGroup, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 
 const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
   const GoBack = (e) => {
@@ -22,6 +23,12 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
 
   return (
     <div className="formContainer">
+      <br></br>
+      <div className="backButton">
+        <IconButton onClick={GoBack}>
+          <ArrowBackIos />
+        </IconButton>
+      </div>
       <br></br>
       <div className="center">
         <div className="circleContainer">
@@ -67,10 +74,15 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
-                  width: '150px'
+                  width: '150px',
+                  textTransform: 'none',
+                  color: 'black'
                 }}
                 >
-                Dog Treat
+                <div className="toggleButton">
+                  <img className="toggleButtonImage" src="src\svgs\treats.svg" alt="dog treat" />
+                  <b>Dog Treat</b>
+                </div>
               </ToggleButton>
               <ToggleButton
                 value="crate"
@@ -92,10 +104,15 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
-                  width: '150px'
+                  width: '150px',
+                  textTransform: 'none',
+                  color: 'black'
                 }}
                 >
-                Crate
+                <div className="toggleButton">
+                  <img className="toggleButtonImage" src="src\svgs\crate.svg" alt="crate" />
+                  <b>Crate</b>
+                </div>
               </ToggleButton>
             </ToggleButtonGroup>
           </Grid>
@@ -126,10 +143,15 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
-                  width: '150px'
+                  width: '150px',
+                  textTransform: 'none',
+                  color: 'black'
                 }}
                 >
-                Toy
+                <div className="toggleButton">
+                  <img className="toggleButtonImage" src="src\svgs\toys.svg" alt="toy" />
+                  <b>Toy</b>
+                </div>
               </ToggleButton>
               <ToggleButton
                 value="electric collar"
@@ -151,10 +173,15 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                   },
                   boxShadow: '0px 4px 4px 0px #7e7e7e',
                   aspectRatio: '1/1',
-                  width: '150px'
+                  width: '150px',
+                  textTransform: 'none',
+                  color: 'black'
                 }}
                 >
-                Electric collar
+                <div className="toggleButton">
+                  <img className="toggleButtonImage" src="src\svgs\electric collar.svg" alt="electric collar" />
+                  <b>Electric Collar</b>
+                </div>
               </ToggleButton>
             </ToggleButtonGroup>
           </Grid>
