@@ -6,6 +6,7 @@ import { capitalize, fetchVids } from '../utils/helpers';
 import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
 import { NavBar } from '../NavBar.jsx';
+import { useAuthValue } from '../components/AuthContext';
 
 // import { NavBar } from './NavBar.jsx';
 
@@ -20,6 +21,7 @@ const HARDCODED_CATEGORIES = [
 
 export const Home = () => {
   const [data] = useContentDb('video', HARDCODED_CATEGORIES);
+  const { profile, dogProfile } = useAuthValue();
 
   const [selectedCategories, setSelectedCategories] = useState(HARDCODED_CATEGORIES.slice(0, 3));
   // console.log({selectedCategories})
@@ -45,9 +47,9 @@ export const Home = () => {
             />
           </div>
           <div className="right">
-            <div className="petname"> Pubpub </div>
-            <div className="petinfo"> Owner: Samuel Jackson </div>
-            <div className="petinfo2"> Corgi Age: 2 </div>
+            <div className="petname"> {dogProfile?.name} </div>
+            <div className="petinfo"> Owner: {profile?.name} </div>
+            <div className="petinfo2">{`${dogProfile?.breed} Age: ${dogProfile?.age}`}</div>
           </div>
         </div>
         <div className="categories">

@@ -41,9 +41,10 @@ export async function submitForm(state) {
   try {
     if (!email) throw Error();
     const dogProfileRef = await addDoc(collection(db, 'dogs'), {
+      owner: email,
       age: state.age,
       birthday: state.dogBirthday,
-      breed: state.dogBreed,
+      breed: state.dogBreed.value,
       gender: state.dogGender,
       'health issues': state.dogBehavior,
       name: state.dogName
@@ -63,8 +64,8 @@ export async function submitForm(state) {
   return 0;
 }
 
-export const getUser = async (email) => {
-  const itemsColRef = collection(db, 'users');
+export const getProfile = async (col, email) => {
+  const itemsColRef = collection(db, col);
   const dataQuery = query(itemsColRef, where('email', '==', email));
   const querySnapshot = await getDocs(dataQuery);
   return querySnapshot.docs.map((doc) => {
