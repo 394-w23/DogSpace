@@ -7,6 +7,7 @@ import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
 import { NavBar } from '../NavBar.jsx';
 import { useAuthValue } from '../components/AuthContext';
+import FormDialog from './email/EmailFrom';
 
 // import { NavBar } from './NavBar.jsx';
 
@@ -50,9 +51,13 @@ export const Home = () => {
           <div className="right">
             <div className="petname"> {dogProfile?.name} </div>
             <div className="petinfo"> Owner: {profile?.name} </div>
-            <div className="petinfo2">{`${dogProfile ? capitalize(dogProfile.breed) : ''} - Age: ${
-              dogProfile?.age
-            }`}</div>
+            <div className="petinfo"> Email: {profile?.email} </div>
+            <FormDialog
+              userName={profile?.name}
+              userEmail={profile?.email}
+            />
+            <div className="petinfo2">{`${dogProfile ? capitalize(dogProfile.breed) : ''} - Age: ${dogProfile?.age
+              }`}</div>
           </div>
         </div>
         <div className="categories">
