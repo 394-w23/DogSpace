@@ -22,14 +22,22 @@
 .welcome {
   font-family: sans-serif;
   color: #118B6D;
-  /* font-weight: bold;
-  font-size: large; */
   padding: none;
   margin-left: 16px;
   padding-top: 5px;
   font-weight: bolder;
-  /* height: 40%; */
   font-size: 1.5em;
+}
+
+.trainer-page-name {
+  font-family: sans-serif;
+  color: #118B6D;
+  padding: none;
+  margin-left: 16px;
+  padding-top: 5px;
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
 }
 
 .profilepic {
@@ -235,6 +243,106 @@ code {
   color: #445a3c;
   font-weight: bold;
   padding: 2%;
+}
+
+.trainers {
+  /* top: 0; */
+  width: 100%;
+  height: fit-content;
+  color: #118B6D;
+  font-family: sans-serif;
+  text-align: center;
+  justify-content: left;
+  padding-left: 16px;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.trainers-left {
+  height: 9em;
+  width: 9em;
+  padding: none;
+  margin: none;
+  justify-content: center;
+  border:solid;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.trainers-right {
+  font-family: sans-serif;
+  color: black;
+
+  font-size: mediuim;
+  margin-left: 10px;
+  width: 56%;
+  /* height: 110%; */
+  
+  padding-left: 1vw;
+}
+/*  */
+.trainers-top {
+  display: flex;
+  flex-direction: row;
+  width: 96%;
+}
+
+.trainers-name {
+  font-family: sans-serif;
+  color: black;
+  padding: none;
+  padding-bottom: 5px;
+  font-weight: bolder;
+  font-size: 1.3em;
+  width:70%;
+  text-align: left;
+
+}
+
+.trainers-rating {
+  width: 30%;
+  text-align: right;
+  align-content: right;
+  justify-content: right;
+  padding-right: .5em;
+  color: #118B6D;
+}
+
+
+.trainers-content {
+  font-size: .9em;
+  padding-bottom: .5em;
+  text-align: left;
+}
+
+.trainer-experience-years {
+  font-size: .9em;
+  text-align: left;
+}
+
+.trainer-experience-type {
+  font-size: .9em;
+  text-align: left;
+}
+
+.trainer-page-pfp {
+  height: 9em;
+  width: 9em;
+  padding: none;
+  margin: none;
+  justify-content: center;
+  border:solid;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.trainer-page {
+  font-weight: bold;
+}
+.green{
+  color: #11614D;
 }
 
 /* .videos {

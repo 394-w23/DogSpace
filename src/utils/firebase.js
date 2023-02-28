@@ -139,7 +139,6 @@ export const useContentDb = (contentType, categories) => {
 export const useUserDb = (email) => {
   const itemsColRef = collection(db, 'users');
   const dataQuery = query(itemsColRef, where('email', '==', email));
-  console.log(dataQuery);
   return useDbData(dataQuery);
 };
 
@@ -178,3 +177,15 @@ export const useAuthState = () => {
 
   return [user];
 };
+
+export const useExpertDb = () => {
+  const itemsColRef = collection(db, 'experts');
+  const dataQuery = query(itemsColRef);
+  return useDbData(dataQuery);
+}
+
+export const useExpertContentDb = (expert) => {
+  const itemsColRef = collection(db, 'expert content');
+  const dataQuery = query(itemsColRef, where("expert", '==', expert));
+  return useDbData(dataQuery);
+}
