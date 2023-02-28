@@ -21,8 +21,10 @@ export const Home = () => {
 
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const filteredExperts = rawExperts.filter((expert) => expert.categories.some(s => selectedCategories.includes(s.toLowerCase())))
-  console.log(filteredExperts)
+  const filteredExperts = rawExperts.filter((expert) =>
+    expert.categories.some((s) => selectedCategories.includes(s.toLowerCase()))
+  );
+  console.log(filteredExperts);
 
   useEffect(() => {
     if (dogProfile) {
@@ -174,38 +176,36 @@ export const Home = () => {
       {filteredExperts.map((expert) => {
         const { name, bio, rating, experience, categories, pfp } = expert;
         let categoriesString = '';
-        categories.forEach((cat) => categoriesString += cat + ', ');
-        categoriesString = categoriesString.slice(0,-2);
-        return (<a href={`/trainer/${name}`} key={name}>
-        <div className="trainers">
-          <div className="trainers-left">
-            <img style={{width: '100%', padding: "0px", height: '100%', overflow: 'hidden'}} className="trainingImage" src={pfp} />
-          </div>
-          <div className="trainers-right">
-            <div className="trainers-top">
-                <div className="trainers-name">
-                    {name}
+        categories.forEach((cat) => (categoriesString += cat + ', '));
+        categoriesString = categoriesString.slice(0, -2);
+        return (
+          <a href={`/trainer/${name}`} key={name}>
+            <div className="trainers">
+              <div className="trainers-left">
+                <img
+                  style={{ width: '100%', padding: '0px', height: '100%', overflow: 'hidden' }}
+                  className="trainingImage"
+                  src={pfp}
+                />
+              </div>
+              <div className="trainers-right">
+                <div className="trainers-top">
+                  <div className="trainers-name">{name}</div>
+                  <div className="trainers-rating">
+                    <StarRateIcon style={{ fontSize: '1.3rem' }} fontSize="inherit" />
+                    {rating}
+                  </div>
                 </div>
-              <div className="trainers-rating">
-              <StarRateIcon style={{ marginTop: 5, fontSize: '1.3rem' }} fontSize="inherit" />
-                  {rating}
+
+                <div className="trainers-content">{bio}</div>
+                <div className="trainer-experience">
+                  <div className="trainer-experience-years">Exp: {experience}+ yrs</div>
+                  <div className="trainer-experience-type">Expert in: {categoriesString}</div>
+                </div>
               </div>
             </div>
-            
-            <div className="trainers-content">
-              {bio}
-            </div>
-            <div className="trainer-experience">
-              <div className="trainer-experience-years">
-                  Exp: {experience}+ yrs
-              </div>
-              <div className="trainer-experience-type">
-                  Expert in: {categoriesString}
-              </div>
-            </div>
-          </div>
-        </div>
-        </a>)
+          </a>
+        );
       })}
     </>
   );
