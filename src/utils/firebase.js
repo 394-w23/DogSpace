@@ -37,6 +37,18 @@ const storage = getStorage(app);
 //   window.EMULATION = true;
 // }
 
+// calculate the age of the dog from the dog's birthday
+const calculateAge = (birthday) => {
+  const today = new Date();
+  const birthDate = new Date(birthday);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
 export async function submitForm(state) {
   const { email } = await auth.currentUser;
   console.log(state.dogGender);
@@ -46,7 +58,7 @@ export async function submitForm(state) {
     handlePhotoUpload(state.dogPhoto, 'dogs', email);
     const dogProfileRef = await addDoc(collection(db, 'dogs'), {
       email: email,
-      age: state.age,
+      age: calculateAge(state.dogBirthday),
       birthday: state.dogBirthday,
       breed: state.dogBreed.value,
       gender: state.dogGender,
