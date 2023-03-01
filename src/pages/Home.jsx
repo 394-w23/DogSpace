@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import PetsIcon from '@mui/icons-material/Pets';
-import { getPhotoUrl, useContentDb } from '../utils/firebase';
+import { getPhotoUrl, useContentDb, useExpertDb } from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { capitalize, fetchVids } from '../utils/helpers';
 import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
 import { NavBar } from '../NavBar.jsx';
+import StarRateIcon from '@mui/icons-material/StarRate';
 import { useAuthValue } from '../components/AuthContext';
 import FormDialog from './email/EmailFrom';
 
@@ -15,10 +16,16 @@ const HARDCODED_CATEGORIES = ['barking', 'potty training', 'crying', 'aggression
 
 export const Home = () => {
   const [data] = useContentDb('video', HARDCODED_CATEGORIES);
+  const [rawExperts] = useExpertDb();
   const { profile, dogProfile } = useAuthValue();
   const [dogPhoto, setDogPhoto] = useState();
 
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const filteredExperts = rawExperts.filter((expert) =>
+    expert.categories.some((s) => selectedCategories.includes(s.toLowerCase()))
+  );
+  console.log(filteredExperts);
 
   useEffect(() => {
     if (dogProfile) {
@@ -46,7 +53,8 @@ export const Home = () => {
       <div className="top" style={{ position: 'sticky', top: 0, zIndex: 3 }}>
         <div className="header">
           <div className="profilepic">
-            <Avatar sx={{ width: '4rem', height: '4rem' }} src={dogPhoto} />
+            <Avatar src={dogPhoto} />
+            {/* <img src={dogPhoto}/> */}
           </div>
           <div className="right">
             <div className="petname"> {dogProfile?.name} </div>
@@ -153,8 +161,8 @@ export const Home = () => {
           <button className="trainingButton">View more</button>
         </div>
       </div>
-      <div className="welcome"> Experts Solution </div>
-      {selectedCategories.map((category) => {
+      <div className="welcome"> Recommended Expert </div>
+      {/* {selectedCategories.map((category) => {
         return (
           <div key={category} className="bottom-justified">
             <div className="trainer"> {capitalize(category)} </div>
@@ -168,6 +176,40 @@ export const Home = () => {
                 })}
             </div>
           </div>
+        );
+      })} */}
+      {filteredExperts.map((expert) => {
+        const { name, bio, rating, experience, categories, pfp } = expert;
+        let categoriesString = '';
+        categories.forEach((cat) => (categoriesString += cat + ', '));
+        categoriesString = categoriesString.slice(0, -2);
+        return (
+          <a href={`/trainer/${name}`} key={name}>
+            <div className="trainers">
+              <div className="trainers-left">
+                <img
+                  style={{ width: '100%', padding: '0px', height: '100%', overflow: 'hidden' }}
+                  className="trainingImage"
+                  src={pfp}
+                />
+              </div>
+              <div className="trainers-right">
+                <div className="trainers-top">
+                  <div className="trainers-name">{name}</div>
+                  <div className="trainers-rating">
+                    <StarRateIcon style={{ fontSize: '1.3rem' }} fontSize="inherit" />
+                    {rating}
+                  </div>
+                </div>
+
+                <div className="trainers-content">{bio}</div>
+                <div className="trainer-experience">
+                  <div className="trainer-experience-years">Exp: {experience}+ yrs</div>
+                  <div className="trainer-experience-type">Expert in: {categoriesString}</div>
+                </div>
+              </div>
+            </div>
+          </a>
         );
       })}
     </>

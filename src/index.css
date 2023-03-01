@@ -2,7 +2,7 @@
   /* top: 0; */
   width: 100%;
   height: fit-content;
-  color: #118B6D;
+  color: #118b6d;
   font-family: sans-serif;
   text-align: center;
   justify-content: left;
@@ -16,20 +16,28 @@
 
 .top {
   border-bottom: solid #6fcf97;
-  padding-bottom: .51em;
+  padding-bottom: 0.51em;
 }
 
 .welcome {
   font-family: sans-serif;
-  color: #118B6D;
-  /* font-weight: bold;
-  font-size: large; */
+  color: #118b6d;
   padding: none;
   margin-left: 16px;
   padding-top: 5px;
   font-weight: bolder;
-  /* height: 40%; */
   font-size: 1.5em;
+}
+
+.trainer-page-name {
+  font-family: sans-serif;
+  color: #118b6d;
+  padding: none;
+  margin-left: 16px;
+  padding-top: 5px;
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
 }
 
 .profilepic {
@@ -43,7 +51,7 @@
 
 .right {
   font-family: sans-serif;
-  color: #118B6D;
+  color: #118b6d;
   font-weight: bold;
   font-size: large;
   margin-left: 10px;
@@ -57,21 +65,21 @@
   font-weight: bold;
   /* height: 40%; */
   font-size: 1.2em;
-  padding-bottom: .1em;
+  padding-bottom: 0.1em;
 }
 
 .petinfo {
   height: 22%;
   font-weight: normal;
   font-size: 0.7em;
-  padding-bottom: .4em;
-  color: #11614D;
+  padding-bottom: 0.4em;
+  color: #11614d;
 }
 .petinfo2 {
   height: 22%;
   font-weight: normal;
   font-size: 0.7em;
-  color: #11614D;
+  color: #11614d;
 }
 
 section {
@@ -116,22 +124,22 @@ code {
 
 .trainingTips {
   height: 24em;
-  background-color: #D0EBC7;
+  background-color: #d0ebc7;
   border-radius: 1em;
   padding: 1em;
-  margin: .5em 1em 1em 1em;
+  margin: 0.5em 1em 1em 1em;
 }
 
 .trainingTopic {
-  background-color: #D0EBC7;
-  color: #1B9C3F;
+  background-color: #d0ebc7;
+  color: #1b9c3f;
   font-weight: bolder;
   text-align: center;
   justify-content: right;
 }
 
 .trainingImage {
-  background-color: #D0EBC7;
+  background-color: #d0ebc7;
   color: #11614d;
   justify-content: center;
   align-items: center;
@@ -141,26 +149,25 @@ code {
 }
 
 .trainingContent {
-  background-color: #D0EBC7;
-  color: #1B9C3F;
-  padding-bottom: .5em;
+  background-color: #d0ebc7;
+  color: #1b9c3f;
+  padding-bottom: 0.5em;
 }
 
 .trainingBottom {
   width: 100%;
   text-align: right;
-  background-color: #D0EBC7;
+  background-color: #d0ebc7;
 }
 .trainingButton {
-  color: #1B9C3F;
+  color: #1b9c3f;
   width: fit-content;
-  background-color: #8CED8A;
+  background-color: #8ced8a;
   align-items: center;
-  margin: .4em;
+  margin: 0.4em;
   text-align: right;
   border-radius: 1em;
   border: none;
-
 }
 
 .cards {
@@ -237,6 +244,108 @@ code {
   padding: 2%;
 }
 
+.trainers {
+  /* top: 0; */
+  width: calc(100vw - 32px);
+  height: fit-content;
+  color: #118b6d;
+  font-family: sans-serif;
+  text-align: center;
+  justify-content: left;
+  margin-left: 16px;
+  margin-right: 16px;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.trainers-left {
+  height: 7rem;
+  width: 7rem;
+  padding: none;
+  margin: none;
+  justify-content: center;
+  border: solid;
+  border-radius: 100%;
+  /* overflow: hidden; */
+}
+
+.trainers-right {
+  font-family: sans-serif;
+  color: black;
+
+  font-size: mediuim;
+  margin-left: 10px;
+  width: 63%;
+  /* height: 110%; */
+
+  padding-left: 1vw;
+}
+/*  */
+.trainers-top {
+  display: flex;
+  flex-direction: row;
+  width: 96%;
+}
+
+.trainers-name {
+  font-family: sans-serif;
+  color: black;
+  padding: none;
+  padding-bottom: 5px;
+  font-weight: bolder;
+  font-size: 1.3em;
+  width: 70%;
+  text-align: left;
+}
+
+.trainers-rating {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  align-content: right;
+  justify-content: right;
+  padding-right: 0.5em;
+  color: #118b6d;
+}
+
+.trainers-content {
+  font-size: 0.9em;
+  padding-bottom: 0.5em;
+  text-align: left;
+}
+
+.trainer-experience-years {
+  font-size: 0.9em;
+  text-align: left;
+}
+
+.trainer-experience-type {
+  font-size: 0.9em;
+  text-align: left;
+}
+
+.trainer-page-pfp {
+  height: 9em;
+  width: 9em;
+  padding: none;
+  margin: none;
+  justify-content: center;
+  border: solid;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.trainer-page {
+  font-weight: bold;
+}
+.green {
+  color: #11614d;
+}
+
 /* .videos {
   overflow-x: scroll;
 } */
@@ -284,8 +393,8 @@ a {
 }
 
 .selectedCategoryButton {
-  border-color: #30C55A;
-  background-color: #D0EBC7;
+  border-color: #30c55a;
+  background-color: #d0ebc7;
   color: black;
 }
 

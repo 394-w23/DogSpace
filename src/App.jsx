@@ -35,7 +35,7 @@ const App = () => {
           element: <Profile />
         },
         {
-          path: '/trainer',
+          path: '/trainer/:trainerid',
           element: <Category />
         }
       ]
