@@ -10,6 +10,8 @@ import ContactUs from './Email';
 const FormDialog = ({
     userName,
     userEmail,
+    toName,
+    toEmail,
 }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -30,9 +32,9 @@ const FormDialog = ({
                 <DialogTitle>Send Email</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Send a notification to remind him/her to get back their clothes now?
+                        Contant him/her!
                     </DialogContentText>
-                    <ContactUs closeForm={handleClose} userName={userName} userEmail={userEmail} />
+                    <ContactUs closeForm={handleClose} userName={userName} userEmail={userEmail} toName={toName} toEmail={toEmail} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>

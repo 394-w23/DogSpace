@@ -6,6 +6,8 @@ const ContactUs = ({
     closeForm,
     userName,
     userEmail,
+    toEmail,
+    toName,
 }) => {
 
     function sendEmail(e) {
@@ -23,13 +25,13 @@ const ContactUs = ({
     return (
         <form className="contact-form" onSubmit={sendEmail}>
             <label>User name:</label>
-            <input type="text" name="to_name" />
+            <input type="text" name="to_name" defaultValue={toName} />
             <label>Your name:</label>
             <input type="text" name="from_name" defaultValue={userName} />
             <br />
             <br />
             <label>User Email:</label>
-            <input type="email" name="to_email" />
+            <input type="email" name="to_email" defaultValue={toEmail} />
             <label>Your Email:</label>
             <input type="email" name="from_email" defaultValue={userEmail} />
             <br />

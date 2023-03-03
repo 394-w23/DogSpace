@@ -205,6 +205,8 @@ export const Home = () => {
                   <div className="trainer-experience-type">Email: {email}</div>
                   <button type="button" style={{ border: 0, backgroundColor: 'white' }} onClick={(e) => { e.preventDefault() }}>
                     <FormDialog
+                      toName={name}
+                      toEmail={email}
                       userName={profile?.name}
                       userEmail={profile?.email}
                     />
