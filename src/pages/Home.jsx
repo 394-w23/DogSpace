@@ -3,7 +3,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import { getPhotoUrl, useContentDb, useExpertDb } from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { capitalize, fetchVids } from '../utils/helpers';
-import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
+import { Autocomplete, Avatar, Chip, Hidden, Paper, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
 import { NavBar } from '../NavBar.jsx';
 import StarRateIcon from '@mui/icons-material/StarRate';
@@ -60,10 +60,6 @@ export const Home = () => {
             <div className="petname"> {dogProfile?.name} </div>
             <div className="petinfo"> Owner: {profile?.name} </div>
             <div className="petinfo"> Email: {profile?.email} </div>
-            <FormDialog
-              userName={profile?.name}
-              userEmail={profile?.email}
-            />
             <div className="petinfo2">{`${dogProfile ? capitalize(dogProfile.breed) : ''} - Age: ${dogProfile?.age
               }`}</div>
           </div>
@@ -179,7 +175,7 @@ export const Home = () => {
         );
       })} */}
       {filteredExperts.map((expert) => {
-        const { name, bio, rating, experience, categories, pfp } = expert;
+        const { name, bio, rating, experience, categories, pfp, email } = expert;
         let categoriesString = '';
         categories.forEach((cat) => (categoriesString += cat + ', '));
         categoriesString = categoriesString.slice(0, -2);
@@ -206,10 +202,18 @@ export const Home = () => {
                 <div className="trainer-experience">
                   <div className="trainer-experience-years">Exp: {experience}+ yrs</div>
                   <div className="trainer-experience-type">Expert in: {categoriesString}</div>
+                  <div className="trainer-experience-type">Email: {email}</div>
+                  <button type="button" style={{ border: 0, backgroundColor: 'white' }} onClick={(e) => { e.preventDefault() }}>
+                    <FormDialog
+                      userName={profile?.name}
+                      userEmail={profile?.email}
+                    />
+                  </button>
                 </div>
               </div>
             </div>
           </a>
+
         );
       })}
     </>
