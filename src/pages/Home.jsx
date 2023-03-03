@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react';
-import PetsIcon from '@mui/icons-material/Pets';
-import { getPhotoUrl, useContentDb, useExpertDb } from '../utils/firebase';
+import { getPhotoUrl, useContentDb, useExpertDb} from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { capitalize, fetchVids } from '../utils/helpers';
-import { Autocomplete, Avatar, Chip, Paper, TextField } from '@mui/material';
+import { Autocomplete, Avatar, Chip, Icon, Paper, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
 import { NavBar } from '../NavBar.jsx';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { useAuthValue } from '../components/AuthContext';
+import BarkingIcon from '../svgs/barking.svg';
+import CryingIcon from '../svgs/dog.svg';
+import PottyTrainingIcon from '../svgs/pooping.svg';
+import AggressionIcon from '../svgs/aggression.svg';
 
 // import { NavBar } from './NavBar.jsx';
 
 const HARDCODED_CATEGORIES = ['barking', 'potty training', 'crying', 'aggression'];
+
+const categoryToSvg = { 'barking': BarkingIcon, 'crying': CryingIcon, 'potty training': PottyTrainingIcon, 'aggression': AggressionIcon };
 
 export const Home = () => {
   const [data] = useContentDb('video', HARDCODED_CATEGORIES);
@@ -24,7 +29,7 @@ export const Home = () => {
   const filteredExperts = rawExperts.filter((expert) =>
     expert.categories.some((s) => selectedCategories.includes(s.toLowerCase()))
   );
-  console.log(filteredExperts);
+ 
 
   useEffect(() => {
     if (dogProfile) {
@@ -53,7 +58,6 @@ export const Home = () => {
         <div className="header">
           <div className="profilepic">
             <Avatar src={dogPhoto} />
-            {/* <img src={dogPhoto}/> */}
           </div>
           <div className="right">
             <div className="petname"> {dogProfile?.name} </div>
@@ -71,7 +75,9 @@ export const Home = () => {
                 key={`${category}-button`}
                 onClick={() => handleCategoryClick(category)}
                 className={selected ? 'categoryButton selectedCategoryButton' : 'categoryButton'}>
-                <PetsIcon style={{ marginRight: 5, fontSize: '1.3rem' }} fontSize="inherit" />
+                <Icon style={{ marginRight: '0.1rem' }}>
+                  <img src={`${categoryToSvg[category]}`} />
+                </Icon>
                 <h5 style={{ margin: 0 }}>{capitalize(category)}</h5>
               </button>
             );
@@ -82,7 +88,6 @@ export const Home = () => {
       <div className="trainingTips">
         <div className="trainingTopic"> Say Goodbye to Electric Collars </div>
         <div className="trainingImage">
-          {/* <img className="trainingImage" src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTBx4P8w3a_LjSCFWd7bVXa9QD4248PK3ZXNoqi8pfa6W65yKu4"  /> */}
           <svg
             width="249"
             height="159"
@@ -152,60 +157,48 @@ export const Home = () => {
           can cause physical and psycholoical harm to the dog. Therefore, positive reinforcement
           techniques are often suggested as a more humane and effective approach.
         </div>
-        <div className="trainingBottom">
+        {/* <div className="trainingBottom">
           <button className="trainingButton">View more</button>
-        </div>
+        </div> */}
       </div>
       <div className="welcome"> Recommended Expert </div>
-      {/* {selectedCategories.map((category) => {
-        return (
-          <div key={category} className="bottom-justified">
-            <div className="trainer"> {capitalize(category)} </div>
-            <div className="horizontal-scroll">
-              {data
-                .filter((content) => content.category == category)
-                .map((content, index) => {
-                  const { URL, category } = content;
-                  const type = content['content type'];
-                  return <ContentCard key={index} type={type} src={URL} category={category} />;
-                })}
-            </div>
-          </div>
-        );
-      })} */}
-      {filteredExperts.map((expert) => {
-        const { name, bio, rating, experience, categories, pfp } = expert;
-        let categoriesString = '';
-        categories.forEach((cat) => (categoriesString += cat + ', '));
-        categoriesString = categoriesString.slice(0, -2);
-        return (
-          <a href={`/trainer/${name}`} key={name}>
-            <div className="trainers">
-              <div className="trainers-left">
-                <img
-                  style={{ width: '100%', padding: '0px', height: '100%', overflow: 'hidden' }}
-                  className="trainingImage"
-                  src={pfp}
-                />
-              </div>
-              <div className="trainers-right">
-                <div className="trainers-top">
-                  <div className="trainers-name">{name}</div>
-                  <div className="trainers-rating">
-                    <StarRateIcon style={{ fontSize: '1.3rem' }} fontSize="inherit" />
-                    {rating}
+
+      {filteredExperts
+        .sort((a, b) => (b.rating - a.rating))
+        .map((expert) => {
+          const { name, bio, rating, experience, categories, pfp } = expert;
+          let categoriesString = '';
+          categories.forEach((cat) => (categoriesString += cat + ', '));
+          categoriesString = categoriesString.slice(0, -2);
+          return (
+            <a href={`/trainer/${name}`} key={name}>
+              <div className="trainers">
+                <div className="trainers-left">
+                  <Avatar
+                    src={pfp}
+                    component={Paper}
+                    elevation={3}
+                    sx={{ border: '1px solid white', width: '8.6rem', height: '8.6rem' }}
+                  />
+                </div>
+                <div className="trainers-right">
+                  <div className="trainers-top">
+                    <div className="trainers-name">{name}</div>
+                    <div className="trainers-rating">
+                      <StarRateIcon style={{ fontSize: '1.3rem', paddingBottom: '0.2rem'}} fontSize="inherit" />
+                      {Math.round(10 * rating) / 10}
+                    </div>
+                  </div>
+
+                  <div className="trainers-content">{bio}</div>
+                  <div className="trainer-experience">
+                    <div className="trainer-experience-years">Exp: {experience}+ yrs</div>
+                    <div className="trainer-experience-type">Expert in: {categoriesString}</div>
                   </div>
                 </div>
-
-                <div className="trainers-content">{bio}</div>
-                <div className="trainer-experience">
-                  <div className="trainer-experience-years">Exp: {experience}+ yrs</div>
-                  <div className="trainer-experience-type">Expert in: {categoriesString}</div>
-                </div>
               </div>
-            </div>
-          </a>
-        );
+            </a>
+          );
       })}
     </>
   );

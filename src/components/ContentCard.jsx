@@ -1,4 +1,5 @@
 import { getEmbedURL, getYTDataUrl, getYTImgUrl } from '../utils/helpers';
+import { submitRating} from '../utils/firebase';
 import {
   Card,
   CardMedia,
@@ -8,13 +9,15 @@ import {
   Modal,
   Paper,
   Chip,
-  IconButton
+  IconButton,
+  Rating
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from 'react';
 
 export const ContentCard = (props) => {
-  const { type, src, category } = props;
+  const { type, src, category, rating, numOfRatings } = props;
+  const [userRating, setUserRating] = useState(null);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [vidData, setVidData] = useState(undefined);
@@ -31,6 +34,12 @@ export const ContentCard = (props) => {
       .then((response) => response.json())
       .then((data) => setVidData(data));
   }, [src]);
+
+  useEffect(() => {
+    if (userRating!= null) {
+      submitRating(userRating, rating, numOfRatings, src);
+    }
+  }, [userRating])
 
   const imgUrl = getYTImgUrl(src);
   const title = vidData ? vidData.items[0].snippet.title : 'Loading';
@@ -61,15 +70,15 @@ export const ContentCard = (props) => {
   );
 
   const modal = (
-    <Modal open={modalOpen} onClose={handleClose}>
+    <Modal open={modalOpen} onClose={handleClose} slotProps={{}} style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
       <Paper className="modal">
-        <div className="modal-header">
+        <div style={{padding: 0}} className="modal-header">
           <Typography variant="h5">{title}</Typography>
           <IconButton onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </div>
-        <Chip style={{ margin: 8 }} label={formattedCategoryString} color="primary" />
+        <Chip style={{margin: '8px 0px'}} label={formattedCategoryString} color="primary" />
         <div className="video-responsive">
           <iframe
             width="426.5"
@@ -81,6 +90,9 @@ export const ContentCard = (props) => {
             title="Embedded youtube"
           />
         </div>
+        <div className="ratingDiv">
+          <Rating name="simple-controlled" defaultValue={0} precision={0.5} value={userRating} onChange={(_e, newVal) => {setUserRating(newVal)}} sx={{ color: '#6FCF97', padding: '2%', fontSize: '2.5rem' }}/>
+        </div>
         <Typography>{description}</Typography>
       </Paper>
     </Modal>
@@ -88,8 +100,8 @@ export const ContentCard = (props) => {
 
   return (
     <>
-      {card}
       {modal}
+      {card}
     </>
   );
 };

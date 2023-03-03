@@ -107,8 +107,8 @@ export const Category = () => {
               {data
                 .filter((content) => content.category == category)
                 .map((content, index) => {
-                  const { url, category } = content;
-                  return <ContentCard key={index} src={url} category={category} />;
+                  const { url, category, rating, numOfRatings } = content;
+                  return <ContentCard key={index} src={url} category={category} rating={rating} numOfRatings={numOfRatings} />;
                 })}
             </div>
           </div>

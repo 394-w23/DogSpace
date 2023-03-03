@@ -147,13 +147,16 @@ code {
   align-items: center;
   /* border: solid; */
   padding-top: 1em;
-  padding-bottom: 1.5em;
+  padding-bottom: 1em;
+  text-align: center;
 }
 
 .trainingContent {
   background-color: #d0ebc7;
   color: #1b9c3f;
   padding-bottom: 0.5em;
+  text-align: center;
+  line-height: 1.5em;  
 }
 
 .trainingBottom {
@@ -265,13 +268,13 @@ code {
 }
 
 .trainers-left {
-  height: 7rem;
-  width: 7rem;
+  height: 10rem;
+  width: 10rem;
   padding: none;
   margin: none;
-  justify-content: center;
-  border: solid;
-  border-radius: 100%;
+  /* justify-content: center; */
+  /* border: solid;
+  border-radius: 100%; */
   /* overflow: hidden; */
 }
 
@@ -319,16 +322,21 @@ code {
   font-size: 0.9em;
   padding-bottom: 0.5em;
   text-align: left;
+  color: #9a9a9a;
 }
 
 .trainer-experience-years {
   font-size: 0.9em;
   text-align: left;
+  color: #9a9a9a;
+  font-weight: bold;
 }
 
 .trainer-experience-type {
   font-size: 0.9em;
   text-align: left;
+  color: #9a9a9a;
+  font-weight: bold;
 }
 
 .trainer-page-photo {
@@ -446,6 +454,7 @@ a {
 } */
 
 .categories {
+ 
   display: flex;
   flex-wrap: wrap;
   gap: 0.3em 0.3em;
@@ -498,13 +507,14 @@ a {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  padding: 16px;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding: 0px;
   padding-bottom: 0px;
 }
 
@@ -514,4 +524,10 @@ code {
 
 button:hover {
   cursor: pointer;
+}
+
+.ratingDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
