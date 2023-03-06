@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { getPhotoUrl, useContentDb, useExpertDb } from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { capitalize, fetchVids } from '../utils/helpers';
-import { Autocomplete, Avatar, Chip, Hidden, Paper, TextField } from '@mui/material';
 import { Autocomplete, Avatar, Chip, Icon, Paper, TextField } from '@mui/material';
 import { CATEGORIES } from '../utils/constants';
 import { NavBar } from '../NavBar.jsx';
