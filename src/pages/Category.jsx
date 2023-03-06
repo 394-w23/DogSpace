@@ -5,6 +5,7 @@ import { useExpertContentDb, useExpertDb } from '../utils/firebase';
 import { ContentCard } from '../components/ContentCard';
 import { useParams } from 'react-router-dom';
 import { ErrorPage } from './ErrorPage';
+import { Avatar, Paper } from '@mui/material';
 
 export const Category = () => {
   const { trainerid } = useParams();
@@ -49,45 +50,55 @@ export const Category = () => {
   expertiseBreedsString = expertiseBreedsString.slice(0, -2);
 
   return (
-    <>
-      <div className="trainer-page-pfp">
-        {/* <Avatar  src={pfp} /> */}
-        <img
-          style={{ width: '100%', padding: '0px', height: '100%', overflow: 'hidden' }}
-          className="trainingImage"
+    <div style={{ position: 'relative' }}>
+      <img
+        className="trainer-page-photo"
+        src="https://humaneheroes.org/wp-content/uploads/2019/09/txhh_best-practices-when-taking-dog-park.png"
+      />
+      <div className="trainer-page-header">
+        <Avatar
           src={pfp}
+          component={Paper}
+          elevation={3}
+          sx={{ border: '1px solid white', width: '9rem', height: '9rem' }}
         />
+        <div className="trainer-page-name">{name}</div>
       </div>
-      <div className="trainer-page-name">{name}</div>
       <div className="trainer-page">
-        <div className="trainer-page-location">
+        <button className="trainer-contact-button">Contact</button>
+        <div className="trainer-page-attr">
           <div className="green">Location:</div>
           {location}
         </div>
-        <div className="trainer-page-experience">
+        <div className="trainer-page-attr">
           <div className="green">Experience:</div>
           <span>{experience} Years</span>
         </div>
-        <div className="trainer-page-breed">
+        <div className="trainer-page-attr">
           <div className="green">Expertise Breed:</div>
           {expertiseBreedsString}
         </div>
-        <div className="trainer-page-bio">{bio}</div>
-        <div className="green">Training Specialization</div>
+        <div style={{ fontWeight: 'normal' }} className="trainer-page-attr">
+          {bio}
+        </div>
+        <div className="trainer-page-attr">
+          <div className="green">Training Specialization</div>
+        </div>
       </div>
-
-      {categories.map((category) => {
-        const selected = selectedCategories.includes(category);
-        return (
-          <button
-            key={`${category}-button`}
-            onClick={() => handleCategoryClick(category)}
-            className={selected ? 'categoryButton selectedCategoryButton' : 'categoryButton'}>
-            <PetsIcon style={{ marginRight: 5, fontSize: '1.3rem' }} fontSize="inherit" />
-            <h5 style={{ margin: 0 }}>{capitalize(category)}</h5>
-          </button>
-        );
-      })}
+      <div className="categories">
+        {categories.map((category) => {
+          const selected = selectedCategories.includes(category);
+          return (
+            <button
+              key={`${category}-button`}
+              onClick={() => handleCategoryClick(category)}
+              className={selected ? 'categoryButton selectedCategoryButton' : 'categoryButton'}>
+              <PetsIcon style={{ marginRight: 5, fontSize: '1.3rem' }} fontSize="inherit" />
+              <h5 style={{ margin: 0 }}>{capitalize(category)}</h5>
+            </button>
+          );
+        })}
+      </div>
       {selectedCategories.map((category) => {
         return (
           <div key={category} className="bottom-justified">
@@ -96,13 +107,13 @@ export const Category = () => {
               {data
                 .filter((content) => content.category == category)
                 .map((content, index) => {
-                  const { url, category } = content;
-                  return <ContentCard key={index} src={url} category={category} />;
+                  const { url, category, rating, numOfRatings } = content;
+                  return <ContentCard key={index} src={url} category={category} rating={rating} numOfRatings={numOfRatings} />;
                 })}
             </div>
           </div>
         );
       })}
-    </>
+    </div>
   );
 };

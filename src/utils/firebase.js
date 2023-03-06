@@ -9,7 +9,9 @@ import {
   query,
   onSnapshot,
   where,
-  getDocs
+  getDocs,
+  updateDoc,
+  doc
 } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
@@ -37,6 +39,18 @@ const storage = getStorage(app);
 //   window.EMULATION = true;
 // }
 
+// calculate the age of the dog from the dog's birthday
+const calculateAge = (birthday) => {
+  const today = new Date();
+  const birthDate = new Date(birthday);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
 export async function submitForm(state) {
   const { email } = await auth.currentUser;
   console.log(state.dogGender);
@@ -46,7 +60,7 @@ export async function submitForm(state) {
     handlePhotoUpload(state.dogPhoto, 'dogs', email);
     const dogProfileRef = await addDoc(collection(db, 'dogs'), {
       email: email,
-      age: state.age,
+      age: calculateAge(state.dogBirthday),
       birthday: state.dogBirthday,
       breed: state.dogBreed.value,
       gender: state.dogGender,
@@ -67,6 +81,47 @@ export async function submitForm(state) {
   }
   return 0;
 }
+
+export const submitRating = async (newRating, currRating, currNumOfRatings, src) => {
+  // const myDoc = await collection(db, 'expert content');
+  const contentRef = collection(db, 'expert content');
+  const contentQuery = query(contentRef, where('url', '==', src));
+  const contentQuerySnapshot = await getDocs(contentQuery);
+  const myDoc = contentQuerySnapshot.docs.map((docSnapshot) => docSnapshot.id);
+  const docRef = doc(db, 'expert content', myDoc[0]);
+  const newNumOfRatings  = currNumOfRatings + 1;
+  const newAvgRating = (currRating * currNumOfRatings + newRating) / newNumOfRatings; 
+  console.log("Debug")
+  await updateDoc(docRef, {
+    rating: newAvgRating,
+    numOfRatings: newNumOfRatings
+  })
+
+  const myData = contentQuerySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+  const trainer = myData[0].expert;
+  const allContentQuery = query(contentRef, where('expert', '==', trainer));
+  const allContentQuerySnapshot = await getDocs(allContentQuery);
+  const allMyData = allContentQuerySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+  let totalRating = 0;
+  let totalNumOfRatings = 0;
+  allMyData.forEach((content) => {
+    totalRating += (content.rating * content.numOfRatings);
+    totalNumOfRatings += content.numOfRatings;
+  })
+  let averageTrainerRating = totalRating / totalNumOfRatings;
+
+  const trainerRef = collection (db, 'experts');
+  const trainerQuery = query(trainerRef, where('name', '==', trainer));
+  const trainerQuerySnapshot = await getDocs(trainerQuery);
+  const myTrainer = trainerQuerySnapshot.docs.map((docSnapshot) => docSnapshot.id);
+  const myTrainerRef = doc(db, 'experts', myTrainer[0]);
+  await updateDoc(myTrainerRef, {
+    rating: averageTrainerRating
+  })
+
+
+}
+
 
 export const handlePhotoUpload = (file, folder, user) => {
   if (!file) {

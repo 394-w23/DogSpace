@@ -80,7 +80,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="src\svgs\treats.svg" alt="dog treat" />
+                  <img className="toggleButtonImage" src="../../../src/svgs/treats.svg" alt="dog treat" />
                   <b>Dog Treat</b>
                 </div>
               </ToggleButton>
@@ -110,7 +110,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="src\svgs\crate.svg" alt="crate" />
+                  <img className="toggleButtonImage" src="../../../src/svgs/crate.svg" alt="crate" />
                   <b>Crate</b>
                 </div>
               </ToggleButton>
@@ -149,7 +149,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="src\svgs\toys.svg" alt="toy" />
+                  <img className="toggleButtonImage" src="../../../src/svgs/toys.svg" alt="toy" />
                   <b>Toy</b>
                 </div>
               </ToggleButton>
@@ -179,7 +179,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="src\svgs\electric collar.svg" alt="electric collar" />
+                  <img className="toggleButtonImage" src="../../../src/svgs/electric collar.svg" alt="electric collar" />
                   <b>Electric Collar</b>
                 </div>
               </ToggleButton>

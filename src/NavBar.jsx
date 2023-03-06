@@ -23,14 +23,14 @@ export const NavBar = () => {
           showLabels
           value={value}
           onChange={handleChange}>
-          <BottomNavigationAction
+          {/* <BottomNavigationAction
             // sx = {{color: 'gray'}}
             component={Link}
             to="/home"
             label="Home"
             value="/home"
             icon={<HomeIcon />}
-          />
+          /> */}
           <BottomNavigationAction
             component={Link}
             to="/"
