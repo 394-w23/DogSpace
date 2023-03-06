@@ -6,6 +6,9 @@ import { ContentCard } from '../components/ContentCard';
 import { useParams } from 'react-router-dom';
 import { ErrorPage } from './ErrorPage';
 import { Avatar, Paper } from '@mui/material';
+import FormDialog from './contact/EmailForm';
+import { useAuthValue } from '../components/AuthContext';
+
 
 export const Category = () => {
   const { trainerid } = useParams();
@@ -16,6 +19,8 @@ export const Category = () => {
 
   const [expertData, setExpertData] = useState(undefined);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const { profile, dogProfile } = useAuthValue();
 
   const handleCategoryClick = (id) => {
     const selected = selectedCategories.includes(id);
@@ -42,7 +47,7 @@ export const Category = () => {
   if (!expertData && !loading) return <ErrorPage />;
   if (!expertData) return <div />;
 
-  const { name, bio, rating, experience, categories, pfp, location } = expertData;
+  const { name, bio, rating, experience, categories, pfp, location, email } = expertData;
   const expertiseBreeds = expertData['expertise breeds'];
 
   let expertiseBreedsString = '';
@@ -65,7 +70,9 @@ export const Category = () => {
         <div className="trainer-page-name">{name}</div>
       </div>
       <div className="trainer-page">
-        <button className="trainer-contact-button">Contact</button>
+        {/* <button className="trainer-contact-button">Contact</button> */}
+
+        <FormDialog userName={profile.name} userEmail={profile.email} toName={name} toEmail={email} />
         <div className="trainer-page-attr">
           <div className="green">Location:</div>
           {location}
