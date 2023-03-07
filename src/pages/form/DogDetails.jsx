@@ -1,8 +1,9 @@
 import React from 'react';
 import '../../Form.css';
-import { Autocomplete, Avatar, Button, ButtonGroup, FormControl, TextField, IconButton } from '@mui/material';
+import { Autocomplete, Avatar, Button, ButtonGroup, FormControl, TextField, IconButton, Badge } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
+import EditIcon from '@mui/icons-material/Edit';
 
 const DogDetails = ({ previousStep, nextStep, handleChange, values }) => {
   const GoBack = (e) => {
@@ -207,21 +208,30 @@ const DogDetails = ({ previousStep, nextStep, handleChange, values }) => {
       <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
         <h1 className="dogProfileH1">Set up your dog profile</h1>
         <div className="avatar">
-          <Avatar sx={{ width: '45vw', height: '45vw' }} src={values.dogPhotoPreviewUrl} />
-          <input
+        <Badge
+          overlap="circular"
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            badgeContent={
+              <>
+              <input
             accept="image/*"
             style={{ display: 'none' }}
-            id="dog-photo-upload"
+            id="profile-photo-upload"
             type="file"
             onChange={handleChange('dogPhoto')}
           />
-          <label htmlFor="dog-photo-upload">
-            <IconButton component="span">
-              <PhotoCamera />
+          <label htmlFor="profile-photo-upload" >
+            <IconButton component="span" style={{ background: "#85ce98" }} sx={{ "&:hover": { color: "black" } }}>
+              <EditIcon style={{ fontSize: "1.8rem" }} />
             </IconButton>
           </label>
+          </>
+            }
+            >
+          <Avatar sx={{ width: '45vw', height: '45vw' }} src={values.dogPhotoPreviewUrl} />
+          
+          </ Badge>
         </div>
-        <h6 className="upload"><b>Upload your dog photo</b></h6>
         <br></br>
         <br></br>
         <TextField

@@ -125,7 +125,7 @@ export const submitRating = async (newRating, currRating, currNumOfRatings, src)
 
 export const handlePhotoUpload = (file, folder, user) => {
   if (!file) {
-    alert('Please upload an image first!');
+    return;
   }
   const storageRef = ref(storage, `/${folder}/${user}`);
   const uploadTask = uploadBytesResumable(storageRef, file);

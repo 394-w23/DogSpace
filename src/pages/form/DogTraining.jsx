@@ -2,6 +2,10 @@ import React from 'react';
 import '../../Form.css';
 import { Checkbox, FormControl, FormControlLabel, Grid, IconButton, RadioGroup, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
+import TreatsIcon from '/src/svgs/treats.svg';
+import CrateIcon from '/src/svgs/crate.svg';
+import ToyIcon from '/src/svgs/toys.svg';
+import ElectricCollarIcon from '/src/svgs/electric collar.svg';
 
 const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
   const GoBack = (e) => {
@@ -80,7 +84,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="../../../src/svgs/treats.svg" alt="dog treat" />
+                  <img className="toggleButtonImage" src={TreatsIcon} alt="dog treat" />
                   <b>Dog Treat</b>
                 </div>
               </ToggleButton>
@@ -110,7 +114,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="../../../src/svgs/crate.svg" alt="crate" />
+                  <img className="toggleButtonImage" src={CrateIcon} alt="crate" />
                   <b>Crate</b>
                 </div>
               </ToggleButton>
@@ -149,7 +153,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="../../../src/svgs/toys.svg" alt="toy" />
+                  <img className="toggleButtonImage" src={ToyIcon} alt="toy" />
                   <b>Toy</b>
                 </div>
               </ToggleButton>
@@ -179,7 +183,7 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="../../../src/svgs/electric collar.svg" alt="electric collar" />
+                  <img className="toggleButtonImage" src={ElectricCollarIcon} alt="electric collar" />
                   <b>Electric Collar</b>
                 </div>
               </ToggleButton>
@@ -188,7 +192,6 @@ const DogTraining = ({ previousStep, nextStep, handleChange, values }) => {
         </Grid>
         <br></br>
         <h1>Training Preference</h1>
-        <br></br>
         <br></br>
         <RadioGroup
           value={values.dogTrainingPreference}

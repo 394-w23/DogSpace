@@ -2,6 +2,10 @@ import React from 'react';
 import '../../Form.css';
 import { FormControl, Grid, IconButton, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
+import BarkingIcon from '/src/svgs/barking.svg';
+import CryingIcon from '/src/svgs/crying.svg';
+import PottyTrainingIcon from '/src/svgs/pooping.svg';
+import AggressionIcon from '/src/svgs/aggression.svg';
 
 const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
   const GoBack = (e) => {
@@ -75,7 +79,7 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                   <div className="toggleButton">
-                    <img className="toggleButtonImage" src="../../../src/svgs/barking.svg" alt="barking" />
+                    <img className="toggleButtonImage" src={BarkingIcon} alt="barking" />
                     <b>Barking</b>
                   </div>
               </ToggleButton>
@@ -105,7 +109,7 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="../../../src/svgs/dog.svg" alt="crying" />
+                  <img className="toggleButtonImage" src={CryingIcon} alt="crying" />
                   <b>Crying</b>
                 </div>
               </ToggleButton>
@@ -145,7 +149,7 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="../../../src/svgs/pooping.svg" alt="potty training" />
+                  <img className="toggleButtonImage" src={PottyTrainingIcon} alt="potty training" />
                   <b>Potty Training</b>
                 </div>
               </ToggleButton>
@@ -175,7 +179,7 @@ const DogBehavior = ({ previousStep, nextStep, handleChange, values }) => {
                 }}
                 >
                 <div className="toggleButton">
-                  <img className="toggleButtonImage" src="../../../src/svgs/aggression.svg" alt="aggression" />
+                  <img className="toggleButtonImage" src={AggressionIcon} alt="aggression" />
                   <b>Aggression</b>
                 </div>
               </ToggleButton>

@@ -6,8 +6,10 @@ import { ContentCard } from '../components/ContentCard';
 import { useParams } from 'react-router-dom';
 import { ErrorPage } from './ErrorPage';
 import { Avatar, Paper } from '@mui/material';
-import FormDialog from './contact/EmailForm';
+import EmailForm from './contact/EmailForm';
+import WhatsAppForm from './contact/WhatsAppForm';
 import { useAuthValue } from '../components/AuthContext';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 
 export const Category = () => {
@@ -47,7 +49,7 @@ export const Category = () => {
   if (!expertData && !loading) return <ErrorPage />;
   if (!expertData) return <div />;
 
-  const { name, bio, rating, experience, categories, pfp, location, email } = expertData;
+  const { name, bio, rating, experience, categories, pfp, location, email, whatsapp} = expertData;
   const expertiseBreeds = expertData['expertise breeds'];
 
   let expertiseBreedsString = '';
@@ -71,8 +73,18 @@ export const Category = () => {
       </div>
       <div className="trainer-page">
         {/* <button className="trainer-contact-button">Contact</button> */}
-        <div className="trainer-contact-button"><FormDialog userName={profile.name} userEmail={profile.email} toName={name} toEmail={email} /></div>
-
+        <div className="trainer-contact-button">
+          <EmailForm userName={profile.name} userEmail={profile.email} toName={name} toEmail={email} />
+          <WhatsAppForm toName={name} toWhatsApp={whatsapp} />
+          {/* <WhatsAppIcon
+            sx={{color:'#118b6d'}}
+          /> */}
+          
+        </div>
+        <div className="trainer-instagram-button">
+        
+        </div>
+        
         <div className="trainer-page-attr">
           <div className="green">Location:</div>
           {location}

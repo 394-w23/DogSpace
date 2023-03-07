@@ -377,7 +377,8 @@ code {
   top: 0;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
+  gap: .4em;
   margin: 4px 2px;
 }
 
@@ -521,4 +522,8 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.contact-button:hover {
+  cursor: pointer;
 }

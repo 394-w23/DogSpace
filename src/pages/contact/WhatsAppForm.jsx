@@ -5,14 +5,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import ContactUs from './Email';
-import EmailIcon from '@mui/icons-material/Email';
+import ContactUs from './WhatsApp';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
-const EmailForm = ({
-    userName,
-    userEmail,
+const WhatsAppForm = ({
     toName,
-    toEmail,
+    toWhatsApp,
 }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -25,18 +23,16 @@ const EmailForm = ({
     };
 
     return (
+        
         <div style={{ overflow: 'visible' }} >
-            {/* <Button variant="outlined" onClick={handleClickOpen}>
-                Send Email
-            </Button> */}
-            <EmailIcon className="contact-button" style={{ color: '#118B6D', float: 'right' }} onClick={handleClickOpen} />
+            <WhatsAppIcon className="contact-button" style={{ color: '#118B6D', float: 'right' }} onClick={handleClickOpen} />
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Send Email</DialogTitle>
+                <DialogTitle>Send WhatsApp</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Contact 
+                        Contact him/her at
                     </DialogContentText>
-                    <ContactUs closeForm={handleClose} userName={userName} userEmail={userEmail} toName={toName} toEmail={toEmail} />
+                    <ContactUs closeForm={handleClose} toName={toName} toWhatsApp={toWhatsApp} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
@@ -46,4 +42,4 @@ const EmailForm = ({
     );
 }
 
-export default EmailForm;
+export default WhatsAppForm;

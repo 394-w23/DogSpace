@@ -32,7 +32,7 @@ const ContactUs = ({
             {/* <label>Your name:</label> */}
             <input type="hidden" name="from_name" defaultValue={userName} />
             {/* <label>User Email:</label> */}
-            <input type="hidden" name="to_email" defaultValue={toEmail} />
+            <input name="to_email" defaultValue={toEmail} style={{border:'none', fontSize:'15px', color: '#118B6D'}}/>
             {/* <label>Your Email:</label> */}
             <input type="hidden" name="from_email" defaultValue={userEmail} />
             <textarea style={{ width: '100%', height: '100px' }} name="html_message" />
