@@ -18,6 +18,7 @@ const ContactUs = ({
         emailjs.sendForm('service_2le5hw2', 'template_lr44ole', e.target, 'iJW7z1X3ROxNPiqVa')
             .then((result) => {
                 closeForm();
+                setShowToast(true);
                 e.preventDefault();
             }, (error) => {
                 console.log(error.text);
