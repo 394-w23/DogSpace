@@ -77,6 +77,7 @@
   padding-bottom: 0.4em;
   color: #11614d;
 }
+
 .petinfo2 {
   height: 22%;
   font-weight: normal;
@@ -156,7 +157,7 @@ code {
   color: #1b9c3f;
   padding-bottom: 0.5em;
   text-align: center;
-  line-height: 1.5em;  
+  line-height: 1.5em;
 }
 
 .trainingBottom {
@@ -164,6 +165,7 @@ code {
   text-align: right;
   background-color: #d0ebc7;
 }
+
 .trainingButton {
   color: #1b9c3f;
   width: fit-content;
@@ -289,6 +291,7 @@ code {
 
   padding-left: 1vw;
 }
+
 /*  */
 .trainers-top {
   display: flex;
@@ -376,18 +379,10 @@ code {
   position: absolute;
   right: 0;
   top: 0;
-  background-color: #85ce98;
-  border: none;
-  color: #285316;
-  padding: 8px 16px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 20px;
-  box-shadow: 0 8px 4px -4px rgba(89, 169, 116, 1), 0 6px 20px 0 rgba(89, 169, 116, 0.5);
 }
 
 .green {
@@ -454,7 +449,7 @@ a {
 } */
 
 .categories {
- 
+
   display: flex;
   flex-wrap: wrap;
   gap: 0.3em 0.3em;

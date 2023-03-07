@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ContactUs from './Email';
 import EmailIcon from '@mui/icons-material/Email';
-import { positions } from '@mui/system';
+import '../../index.css'
 
 const FormDialog = ({
     userName,
@@ -26,12 +26,12 @@ const FormDialog = ({
     };
 
     return (
-        <div>
+        <div container={document.body} style={{ filter: blur }}>
             {/* <Button variant="outlined" onClick={handleClickOpen}>
                 Send Email
             </Button> */}
-            <EmailIcon style={{ color: 'green', float: 'right' }} onClick={handleClickOpen} />
-            <Dialog open={open} onClose={handleClose}>
+            <EmailIcon style={{ color: '#118B6D', float: 'right' }} onClick={handleClickOpen} />
+            <Dialog open={open} onClose={handleClose} style={{ filter: blur() }}>
                 <DialogTitle>Send Email</DialogTitle>
                 <DialogContent>
                     <DialogContentText>

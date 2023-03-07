@@ -71,8 +71,8 @@ export const Category = () => {
       </div>
       <div className="trainer-page">
         {/* <button className="trainer-contact-button">Contact</button> */}
+        <div className="trainer-contact-button"><FormDialog userName={profile.name} userEmail={profile.email} toName={name} toEmail={email} /></div>
 
-        <FormDialog userName={profile.name} userEmail={profile.email} toName={name} toEmail={email} />
         <div className="trainer-page-attr">
           <div className="green">Location:</div>
           {location}
