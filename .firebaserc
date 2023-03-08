@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "dogspace-d492c"
-  }
+  },
+  "targets": {
+    "dogspace-d492c": {
+      "hosting": {
+        "production": [
+          "dogspace-d492c"
+        ],
+        "development": [
+          "development-9c3cd"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
