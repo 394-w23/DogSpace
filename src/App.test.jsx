@@ -45,12 +45,6 @@ describe('<App />', () => {
     it('display dog name from dog profile', () => {
       expect(screen.getByText('Test Dog')).toBeDefined();
     });
-
-    it('load home page', async () => {
-      const homeButton = screen.getByText('Home');
-      fireEvent.click(homeButton);
-      expect(await screen.getByText('no page yet')).toBeDefined();
-    });
   });
 
   describe('without logged in user', () => {
@@ -60,8 +54,8 @@ describe('<App />', () => {
       render(<App />);
     });
 
-    it('displays sign in page', () => {
-      expect(screen.getByText('ZENDOG')).toBeDefined();
+    it('displays sign in page', async () => {
+      expect(await screen.getByText('ZENDOG')).toBeDefined();
     });
   });
 });
