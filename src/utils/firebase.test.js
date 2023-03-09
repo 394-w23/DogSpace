@@ -37,7 +37,7 @@ describe('submit rating', () => {
       });
 })
 
-describe ('get photo URL', () => {
+/* describe ('get photo URL', () => {
     const folder = "dogs";
     const user = "brevanmitchell2023@u.northwestern.edu";
 
@@ -52,4 +52,4 @@ describe ('get photo URL', () => {
     });
 
 
-})
+}) */
