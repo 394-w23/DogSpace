@@ -49,7 +49,6 @@ export default class Form extends Component {
       reader.readAsDataURL(file);
       return;
     }
-
     if (Array.isArray(e) || e.hasOwnProperty('label')) {
       console.log(e);
       this.setState({ [input]: e });

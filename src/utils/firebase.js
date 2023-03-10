@@ -63,7 +63,7 @@ export async function submitForm(state) {
       age: calculateAge(state.dogBirthday),
       birthday: state.dogBirthday,
       breed: state.dogBreed.value,
-      gender: state.dogGender,
+      gender: state.dogGender || "",
       'health issues': state.dogBehavior,
       name: state.dogName
       //todo: tools and training preference, user
