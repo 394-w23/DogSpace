@@ -47,15 +47,17 @@ describe('<App />', () => {
     });
   });
 
-  // describe('without logged in user', () => {
-  //   beforeEach(() => {
-  //     useAuthState.mockReturnValue([null]);
-  //     useProfile.mockReturnValue([null]);
-  //     render(<App />);
-  //   });
+  describe('without logged in user', () => {
+    beforeEach(() => {
+      useAuthState.mockReturnValue([null]);
+      useProfile.mockReturnValue([null]);
+      render(<App />);
+    });
 
-  //   it('displays sign in page', async () => {
-  //     expect(await screen.getByText('ZENDOG')).toBeDefined();
-  //   });
-  // });
+    it('displays sign in page', async () => {
+      await screen.findByText('ZENDOG', {}, { timeout: 5000 });
+
+      expect(await screen.getByText('ZENDOG')).toBeDefined();
+    });
+  });
 });
