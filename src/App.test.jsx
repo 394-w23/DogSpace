@@ -35,27 +35,31 @@ describe('<App />', () => {
       useAuthState.mockReturnValue([user]);
       useProfile.mockReturnValueOnce([profile]);
       useProfile.mockReturnValueOnce([dogProfile]);
-      render(<App />);
     });
 
     it('should load training tips', () => {
+      render(<App />);
+
       expect(screen.getByText('Paw-some Training Tips')).toBeDefined();
     });
 
     it('display dog name from dog profile', () => {
+      render(<App />);
+
       expect(screen.getByText('Test Dog')).toBeDefined();
     });
   });
 
-  // describe('without logged in user', () => {
-  //   beforeEach(() => {
-  //     useAuthState.mockReturnValue([null]);
-  //     useProfile.mockReturnValue([null]);
-  //     render(<App />);
-  //   });
+  describe('without logged in user', () => {
+    beforeEach(() => {
+      useAuthState.mockReturnValue([null]);
+      useProfile.mockReturnValue([null]);
+    });
 
-  //   it('displays sign in page', async () => {
-  //     expect(await screen.getByText('ZENDOG')).toBeDefined();
-  //   });
-  // });
+    it('displays sign in page', async () => {
+      render(<App />);
+
+      expect(await screen.queryByText('Test Dog')).toBeNull();
+    });
+  });
 });

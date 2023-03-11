@@ -32,6 +32,7 @@ const db = initializeFirestore(app, {
 });
 const auth = getAuth(app);
 const storage = getStorage(app);
+// console.log({ storage });
 
 // if (!window.EMULATION && import.meta.env.PROD !== true) {
 //   connectFirestoreEmulator(db, '127.0.0.1', 8080);
@@ -53,7 +54,7 @@ const calculateAge = (birthday) => {
 
 export async function submitForm(state) {
   const { email } = await auth.currentUser;
-  console.log(state.dogGender);
+  // console.log(state.dogGender);
   try {
     if (!email) throw Error();
     handlePhotoUpload(state.userPhoto, 'users', email);
@@ -63,7 +64,7 @@ export async function submitForm(state) {
       age: calculateAge(state.dogBirthday),
       birthday: state.dogBirthday,
       breed: state.dogBreed.value,
-      gender: state.dogGender || "",
+      gender: state.dogGender || '',
       'health issues': state.dogBehavior,
       name: state.dogName
       //todo: tools and training preference, user
@@ -89,13 +90,13 @@ export const submitRating = async (newRating, currRating, currNumOfRatings, src)
   const contentQuerySnapshot = await getDocs(contentQuery);
   const myDoc = contentQuerySnapshot.docs.map((docSnapshot) => docSnapshot.id);
   const docRef = doc(db, 'expert content', myDoc[0]);
-  const newNumOfRatings  = currNumOfRatings + 1;
-  const newAvgRating = (currRating * currNumOfRatings + newRating) / newNumOfRatings; 
-  console.log("Debug")
+  const newNumOfRatings = currNumOfRatings + 1;
+  const newAvgRating = (currRating * currNumOfRatings + newRating) / newNumOfRatings;
+  // console.log('Debug');
   await updateDoc(docRef, {
     rating: newAvgRating,
     numOfRatings: newNumOfRatings
-  })
+  });
 
   const myData = contentQuerySnapshot.docs.map((docSnapshot) => docSnapshot.data());
   const trainer = myData[0].expert;
@@ -105,23 +106,20 @@ export const submitRating = async (newRating, currRating, currNumOfRatings, src)
   let totalRating = 0;
   let totalNumOfRatings = 0;
   allMyData.forEach((content) => {
-    totalRating += (content.rating * content.numOfRatings);
+    totalRating += content.rating * content.numOfRatings;
     totalNumOfRatings += content.numOfRatings;
-  })
+  });
   let averageTrainerRating = totalRating / totalNumOfRatings;
 
-  const trainerRef = collection (db, 'experts');
+  const trainerRef = collection(db, 'experts');
   const trainerQuery = query(trainerRef, where('name', '==', trainer));
   const trainerQuerySnapshot = await getDocs(trainerQuery);
   const myTrainer = trainerQuerySnapshot.docs.map((docSnapshot) => docSnapshot.id);
   const myTrainerRef = doc(db, 'experts', myTrainer[0]);
   await updateDoc(myTrainerRef, {
     rating: averageTrainerRating
-  })
-
-
-}
-
+  });
+};
 
 export const handlePhotoUpload = (file, folder, user) => {
   if (!file) {
@@ -237,10 +235,10 @@ export const useExpertDb = () => {
   const itemsColRef = collection(db, 'experts');
   const dataQuery = query(itemsColRef);
   return useDbData(dataQuery);
-}
+};
 
 export const useExpertContentDb = (expert) => {
   const itemsColRef = collection(db, 'expert content');
-  const dataQuery = query(itemsColRef, where("expert", '==', expert));
+  const dataQuery = query(itemsColRef, where('expert', '==', expert));
   return useDbData(dataQuery);
-}
+};
