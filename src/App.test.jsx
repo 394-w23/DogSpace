@@ -35,14 +35,17 @@ describe('<App />', () => {
       useAuthState.mockReturnValue([user]);
       useProfile.mockReturnValueOnce([profile]);
       useProfile.mockReturnValueOnce([dogProfile]);
-      render(<App />);
     });
 
     it('should load training tips', () => {
+      render(<App />);
+
       expect(screen.getByText('Paw-some Training Tips')).toBeDefined();
     });
 
     it('display dog name from dog profile', () => {
+      render(<App />);
+
       expect(screen.getByText('Test Dog')).toBeDefined();
     });
   });
@@ -51,10 +54,10 @@ describe('<App />', () => {
     beforeEach(() => {
       useAuthState.mockReturnValue([null]);
       useProfile.mockReturnValue([null]);
-      render(<App />);
     });
 
     it('displays sign in page', async () => {
+      render(<App />);
       await screen.findByText('ZENDOG', {}, { timeout: 5000 });
 
       expect(await screen.getByText('ZENDOG')).toBeDefined();
