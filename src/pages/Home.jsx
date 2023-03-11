@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getPhotoUrl, useContentDb, useExpertDb } from '../utils/firebase';
-import { ContentCard } from '../components/ContentCard';
-import { capitalize, fetchVids } from '../utils/helpers';
-import { Autocomplete, Avatar, Chip, Icon, Paper, TextField } from '@mui/material';
-import { CATEGORIES } from '../utils/constants';
-import { NavBar } from '../NavBar.jsx';
+import { getPhotoUrl, useExpertDb } from '../utils/firebase';
+import { capitalize } from '../utils/helpers';
+import { Avatar, Icon, Paper } from '@mui/material';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { useAuthValue } from '../components/AuthContext';
 import BarkingIcon from '../svgs/barking.svg';
@@ -24,7 +21,6 @@ const categoryToSvg = {
 };
 
 export const Home = () => {
-  const [data] = useContentDb('video', HARDCODED_CATEGORIES);
   const [rawExperts] = useExpertDb();
   const { profile, dogProfile } = useAuthValue();
   const [dogPhoto, setDogPhoto] = useState();

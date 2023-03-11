@@ -32,7 +32,7 @@ const db = initializeFirestore(app, {
 });
 const auth = getAuth(app);
 const storage = getStorage(app);
-console.log({ storage });
+// console.log({ storage });
 
 // if (!window.EMULATION && import.meta.env.PROD !== true) {
 //   connectFirestoreEmulator(db, '127.0.0.1', 8080);
@@ -54,7 +54,7 @@ const calculateAge = (birthday) => {
 
 export async function submitForm(state) {
   const { email } = await auth.currentUser;
-  console.log(state.dogGender);
+  // console.log(state.dogGender);
   try {
     if (!email) throw Error();
     handlePhotoUpload(state.userPhoto, 'users', email);
@@ -92,7 +92,7 @@ export const submitRating = async (newRating, currRating, currNumOfRatings, src)
   const docRef = doc(db, 'expert content', myDoc[0]);
   const newNumOfRatings = currNumOfRatings + 1;
   const newAvgRating = (currRating * currNumOfRatings + newRating) / newNumOfRatings;
-  console.log('Debug');
+  // console.log('Debug');
   await updateDoc(docRef, {
     rating: newAvgRating,
     numOfRatings: newNumOfRatings
