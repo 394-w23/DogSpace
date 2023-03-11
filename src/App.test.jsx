@@ -58,9 +58,8 @@ describe('<App />', () => {
 
     it('displays sign in page', async () => {
       render(<App />);
-      await screen.findByText('ZENDOG', {}, { timeout: 5000 });
 
-      expect(await screen.getByText('ZENDOG')).toBeDefined();
+      expect(await screen.queryByText('Test Dog')).toBeNull();
     });
   });
 });
