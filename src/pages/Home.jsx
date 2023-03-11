@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getPhotoUrl, useContentDb, useExpertDb} from '../utils/firebase';
-import { ContentCard } from '../components/ContentCard';
-import { capitalize, fetchVids } from '../utils/helpers';
-import { Autocomplete, Avatar, Chip, Icon, Paper, TextField } from '@mui/material';
-import { CATEGORIES } from '../utils/constants';
-import { NavBar } from '../NavBar.jsx';
+import { getPhotoUrl, useExpertDb } from '../utils/firebase';
+import { capitalize } from '../utils/helpers';
+import { Avatar, Icon, Paper } from '@mui/material';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { useAuthValue } from '../components/AuthContext';
 import BarkingIcon from '../svgs/barking.svg';
@@ -14,12 +11,16 @@ import AggressionIcon from '../svgs/aggression.svg';
 
 // import { NavBar } from './NavBar.jsx';
 
-const HARDCODED_CATEGORIES = ['barking', 'potty training', 'crying', 'aggression'];
+const HARDCODED_CATEGORIES = ['barking', 'pooping', 'crying', 'aggression'];
 
-const categoryToSvg = { 'barking': BarkingIcon, 'crying': CryingIcon, 'potty training': PottyTrainingIcon, 'aggression': AggressionIcon };
+const categoryToSvg = {
+  barking: BarkingIcon,
+  crying: CryingIcon,
+  pooping: PottyTrainingIcon,
+  aggression: AggressionIcon
+};
 
 export const Home = () => {
-  const [data] = useContentDb('video', HARDCODED_CATEGORIES);
   const [rawExperts] = useExpertDb();
   const { profile, dogProfile } = useAuthValue();
   const [dogPhoto, setDogPhoto] = useState();
@@ -29,7 +30,6 @@ export const Home = () => {
   const filteredExperts = rawExperts.filter((expert) =>
     expert.categories.some((s) => selectedCategories.includes(s.toLowerCase()))
   );
- 
 
   useEffect(() => {
     if (dogProfile) {
@@ -164,7 +164,7 @@ export const Home = () => {
       <div className="welcome"> Recommended Expert </div>
 
       {filteredExperts
-        .sort((a, b) => (b.rating - a.rating))
+        .sort((a, b) => b.rating - a.rating)
         .map((expert) => {
           const { name, bio, rating, experience, categories, pfp } = expert;
           let categoriesString = '';
@@ -185,7 +185,10 @@ export const Home = () => {
                   <div className="trainers-top">
                     <div className="trainers-name">{name}</div>
                     <div className="trainers-rating">
-                      <StarRateIcon style={{ fontSize: '1.3rem', paddingBottom: '0.2rem'}} fontSize="inherit" />
+                      <StarRateIcon
+                        style={{ fontSize: '1.3rem', paddingBottom: '0.2rem' }}
+                        fontSize="inherit"
+                      />
                       {Math.round(10 * rating) / 10}
                     </div>
                   </div>
@@ -199,7 +202,7 @@ export const Home = () => {
               </div>
             </a>
           );
-      })}
+        })}
     </>
   );
 };
