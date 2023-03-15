@@ -39,27 +39,27 @@ const PersonalDetails = ({ previousStep, nextStep, handleChange, values }) => {
       <FormControl variant="standard" sx={{ width: '100%', textAlign: 'center' }}>
         <div className="avatar">
           <Badge
-          overlap="circular"
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            overlap="circular"
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             badgeContent={
               <>
-              <input
-            accept="image/*"
-            style={{ display: 'none' }}
-            id="profile-photo-upload"
-            type="file"
-            onChange={handleChange('userPhoto')}
-          />
-          <label htmlFor="profile-photo-upload" >
-            <IconButton component="span" style={{ background: "#85ce98" }} sx={{ "&:hover": { color: "black" } }}>
-              <EditIcon style={{ fontSize: "1.8rem" }} />
-            </IconButton>
-          </label>
-          </>
+                <input
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  id="profile-photo-upload"
+                  type="file"
+                  onChange={() => handleChange('userPhoto')}
+                />
+                <label htmlFor="profile-photo-upload" >
+                  <IconButton component="span" style={{ background: "#85ce98" }} sx={{ "&:hover": { color: "black" } }} role='button'>
+                    <EditIcon style={{ fontSize: "1.8rem" }} />
+                  </IconButton>
+                </label>
+              </>
             }
-            >
-          <Avatar sx={{ width: '45vw', height: '45vw' }} src={values.userPhotoPreviewUrl} />
-          
+          >
+            <Avatar sx={{ width: '45vw', height: '45vw' }} src={values.userPhotoPreviewUrl} />
+
           </ Badge>
         </div>
         {/* <h6 className="upload"><b>Upload your photo</b></h6> */}
@@ -69,7 +69,7 @@ const PersonalDetails = ({ previousStep, nextStep, handleChange, values }) => {
           placeholder="Name"
           variant="filled"
           value={values.name}
-          onChange={handleChange('name')}
+          onChange={() => handleChange('name')}
           hiddenLabel
           InputProps={{
             style: {
@@ -91,7 +91,7 @@ const PersonalDetails = ({ previousStep, nextStep, handleChange, values }) => {
           variant="filled"
           placeholder="Age"
           value={values.age}
-          onChange={handleChange('age')}
+          onChange={() => handleChange('age')}
           hiddenLabel
           InputProps={{
             style: {
@@ -111,7 +111,7 @@ const PersonalDetails = ({ previousStep, nextStep, handleChange, values }) => {
         <h2>
           How do you identify? <span>(Optional)</span>
         </h2>
-        <RadioGroup value={values.gender} onChange={handleChange('gender')}>
+        <RadioGroup value={values.gender} onChange={() => handleChange('gender')}>
           <FormControlLabel
             value="female"
             control={<Radio sx={{ color: '#d9d9d9', '&.Mui-checked': { color: '#d9d9d9' } }} />}

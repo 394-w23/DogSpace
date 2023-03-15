@@ -1,12 +1,22 @@
 import { describe, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Home } from './Home';
+import sinon from 'sinon';
+import PersonalDetails from './form/PersonalDetails'
 import { AuthProvider } from '../components/AuthContext';
 
 const renderHome = (providerProps) => {
   return render(
     <AuthProvider value={providerProps}>
       <Home />
+    </AuthProvider>
+  );
+};
+
+const renderPerson = (providerProps) => {
+  return render(
+    <AuthProvider value={providerProps}>
+      <ersonalDetails />
     </AuthProvider>
   );
 };
@@ -42,3 +52,17 @@ describe('<Home />', () => {
     });
   });
 });
+
+
+// describe('button', () => {
+
+//   describe('with a user and profile', () => {
+//     beforeEach(() => {
+//       render(<PersonalDetails />);
+//     });
+
+//     it('displays category buttons', () => {
+//       expect(screen.getByText('Barking')).toBeDefined();
+//     });
+//   });
+// });
