@@ -23,14 +23,6 @@ export const NavBar = () => {
           showLabels
           value={value}
           onChange={handleChange}>
-          {/* <BottomNavigationAction
-            // sx = {{color: 'gray'}}
-            component={Link}
-            to="/home"
-            label="Home"
-            value="/home"
-            icon={<HomeIcon />}
-          /> */}
           <BottomNavigationAction
             component={Link}
             to="/"
@@ -40,24 +32,6 @@ export const NavBar = () => {
           />
         </BottomNavigation>
       </Paper>
-      {/* <div className="footer">
-        <div className="foothome">
-          <Link to="/">
-            <div>
-              <HomeIcon />
-              <p style={{ margin: 0 }}>Home</p>
-            </div>
-          </Link>
-        </div>
-        <div className="footprofile">
-          <Link to="/profile">
-            <div>
-              <ProfileIcon />
-              <p style={{ margin: 0 }}>Profile</p>
-            </div>
-          </Link>
-        </div>
-      </div> */}
     </>
   );
 };

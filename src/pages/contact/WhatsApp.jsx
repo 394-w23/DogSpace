@@ -12,11 +12,8 @@ const ContactUs= ({
 
     return (
         <form className="contact-form">
-            {/* <label>User name:</label> */}
             <input type="hidden" name="to_name" defaultValue={toName} />
-            {/* <label>Your name:</label> */}
             <input name="to_whatsapp" defaultValue={toWhatsApp} style={{border:'none', fontSize:'15px', color: '#118B6D'}}/>
-            {/* <label>Your Email:</label> */}
         </form>
     );
 }

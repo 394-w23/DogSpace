@@ -55,7 +55,7 @@ describe('firebase.js', () => {
     const querySnapshot = { docs: expertDocs };
 
     beforeEach(async () => {
-      updateDoc.mockReturnValue(undefined); //just a mock
+      updateDoc.mockReturnValue(undefined);
       getDocs.mockReturnValue(Promise.resolve(querySnapshot));
       doc.mockReturnValue(mockedRef);
       await submitRating(newRating, currRating, currNumOfRatings, src);

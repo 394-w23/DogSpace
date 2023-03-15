@@ -41,8 +41,6 @@ export const Home = () => {
     }
   }, [dogProfile]);
 
-  // console.log({selectedCategories})
-
   const handleCategoryClick = (id) => {
     const selected = selectedCategories.includes(id);
     if (selected) {
@@ -157,9 +155,6 @@ export const Home = () => {
           can cause physical and psycholoical harm to the dog. Therefore, positive reinforcement
           techniques are often suggested as a more humane and effective approach.
         </div>
-        {/* <div className="trainingBottom">
-          <button className="trainingButton">View more</button>
-        </div> */}
       </div>
       <div className="welcome"> Recommended Expert </div>
 

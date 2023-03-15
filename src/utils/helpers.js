@@ -1,7 +1,6 @@
 import { firebaseConfig } from './firebase';
 
 const BASE_EMBED_URL = 'https://www.youtube.com/embed/';
-//https://www.youtube.com/watch?v=1ln5lpH5Nf0
 export function getEmbedURL(url) {
   var videoID = url.split('?v=')[1];
   videoID = videoID.split('&')[0];
@@ -34,7 +33,6 @@ export function capitalize(string) {
   return words.join(' ');
 }
 
-// %20 = space char
 export const fetchVids = (query) => {
   const formattedQuery = query.replace(' ', '%20');
   const { apiKey } = firebaseConfig;

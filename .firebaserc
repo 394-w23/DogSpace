@@ -1,15 +1,15 @@
 {
   "projects": {
-    "default": "dogspace-d492c"
+    "default": "[HOSTING_ID]"
   },
   "targets": {
-    "dogspace-d492c": {
+    "[HOSTING_ID  ]": {
       "hosting": {
         "production": [
-          "dogspace-d492c"
+          "[HOSTING_ID]"
         ],
         "development": [
-          "development-9c3cd"
+          "[DEVELOPMENT_ID]"
         ]
       }
     }

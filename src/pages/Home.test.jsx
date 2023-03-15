@@ -53,16 +53,3 @@ describe('<Home />', () => {
   });
 });
 
-
-// describe('button', () => {
-
-//   describe('with a user and profile', () => {
-//     beforeEach(() => {
-//       render(<PersonalDetails />);
-//     });
-
-//     it('displays category buttons', () => {
-//       expect(screen.getByText('Barking')).toBeDefined();
-//     });
-//   });
-// });

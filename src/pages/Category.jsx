@@ -72,13 +72,9 @@ export const Category = () => {
         <div className="trainer-page-name">{name}</div>
       </div>
       <div className="trainer-page">
-        {/* <button className="trainer-contact-button">Contact</button> */}
         <div className="trainer-contact-button">
           <EmailForm userName={profile.name} userEmail={profile.email} toName={name} toEmail={email} />
           <WhatsAppForm toName={name} toWhatsApp={whatsapp} />
-          {/* <WhatsAppIcon
-            sx={{color:'#118b6d'}}
-          /> */}
           
         </div>
         <div className="trainer-instagram-button">

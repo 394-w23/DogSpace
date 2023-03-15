@@ -26,9 +26,6 @@ const EmailForm = ({
 
     return (
         <div style={{ overflow: 'visible' }} >
-            {/* <Button variant="outlined" onClick={handleClickOpen}>
-                Send Email
-            </Button> */}
             <EmailIcon className="contact-button" style={{ color: '#118B6D', float: 'right' }} onClick={handleClickOpen} />
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Send Email</DialogTitle>

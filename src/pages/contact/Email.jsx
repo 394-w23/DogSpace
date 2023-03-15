@@ -27,13 +27,9 @@ const ContactUs = ({
 
     return (
         <form className="contact-form" onSubmit={sendEmail}>
-            {/* <label>User name:</label> */}
             <input type="hidden" name="to_name" defaultValue={toName} />
-            {/* <label>Your name:</label> */}
             <input type="hidden" name="from_name" defaultValue={userName} />
-            {/* <label>User Email:</label> */}
             <input name="to_email" defaultValue={toEmail} style={{border:'none', fontSize:'15px', color: '#118B6D'}}/>
-            {/* <label>Your Email:</label> */}
             <input type="hidden" name="from_email" defaultValue={userEmail} />
             <textarea style={{ width: '100%', height: '100px' }} name="html_message" />
             <input type="submit" style={{ border: 'none', background: 'white', fontSize: '15px', color: '#6FCF97' }} value="SEND" />

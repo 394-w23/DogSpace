@@ -60,16 +60,7 @@ export const Authenticate = () => {
         variant="contained">
         Sign in with Google
       </Button>
-      {/* <button
-        style={{
-          border: 'none',
-          background: 'none',
-          color: 'white',
-          fontSize: '1rem',
-          marginBottom: '2.5rem'
-        }}>
-        Login with Email
-      </button> */}
+     
     </div>
   );
 };

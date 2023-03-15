@@ -16,15 +16,17 @@ import {
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-export const firebaseConfig = {
-  apiKey: 'AIzaSyDbjBadrLuZCDW5ICb7DTxc1ouqgyPGkyU',
-  authDomain: 'dogspace-d492c.firebaseapp.com',
-  projectId: 'dogspace-d492c',
-  storageBucket: 'dogspace-d492c.appspot.com',
-  messagingSenderId: '511047830676',
-  appId: '1:511047830676:web:d88b25122da47fffca3881',
-  measurementId: 'G-JKFL66QQ8S'
-};
+
+// COPY THIS INFORMATION FROM FIREBASE PROJECT SETTINGS -> YOUR APPS -> SDK SETUP AND CONFIGURATION -> NPM
+// export const firebaseConfig = {
+//   apiKey: '[INSERT FIREBASE API KEY HERE]',
+//   authDomain: '[INSERT DOMAIN AUTHENTICATION HERE]',
+//   projectId: '[INSERT PROJECT ID HERE]',
+//   storageBucket: '[INSERT CLOUD STORAGE BUCKET HERE]',
+//   messagingSenderId: '[INSERT CLOUD MESSAGING SENDER ID HERE]',
+//   appId: '[INSERT APP ID HERE]',
+//   measurementId: '[INSERT MEASUREMENT ID HERE]'
+// };
 
 const app = initializeApp(firebaseConfig);
 const db = initializeFirestore(app, {
@@ -32,15 +34,7 @@ const db = initializeFirestore(app, {
 });
 const auth = getAuth(app);
 const storage = getStorage(app);
-// console.log({ storage });
 
-// if (!window.EMULATION && import.meta.env.PROD !== true) {
-//   connectFirestoreEmulator(db, '127.0.0.1', 8080);
-
-//   window.EMULATION = true;
-// }
-
-// calculate the age of the dog from the dog's birthday
 const calculateAge = (birthday) => {
   const today = new Date();
   const birthDate = new Date(birthday);
@@ -54,7 +48,6 @@ const calculateAge = (birthday) => {
 
 export async function submitForm(state) {
   const { email } = await auth.currentUser;
-  // console.log(state.dogGender);
   try {
     if (!email) throw Error();
     handlePhotoUpload(state.userPhoto, 'users', email);
@@ -67,14 +60,12 @@ export async function submitForm(state) {
       gender: state.dogGender || '',
       'health issues': state.dogBehavior,
       name: state.dogName
-      //todo: tools and training preference, user
     });
     const userProfileRef = await addDoc(collection(db, 'users'), {
       age: state.age,
       gender: state.gender,
       name: state.name,
       email: email
-      //todo: tools and training preference, user
     });
     console.log('Document written with ID: ', dogProfileRef.id);
   } catch (e) {
@@ -84,7 +75,6 @@ export async function submitForm(state) {
 }
 
 export const submitRating = async (newRating, currRating, currNumOfRatings, src) => {
-  // const myDoc = await collection(db, 'expert content');
   const contentRef = collection(db, 'expert content');
   const contentQuery = query(contentRef, where('url', '==', src));
   const contentQuerySnapshot = await getDocs(contentQuery);
@@ -92,7 +82,6 @@ export const submitRating = async (newRating, currRating, currNumOfRatings, src)
   const docRef = doc(db, 'expert content', myDoc[0]);
   const newNumOfRatings = currNumOfRatings + 1;
   const newAvgRating = (currRating * currNumOfRatings + newRating) / newNumOfRatings;
-  // console.log('Debug');
   await updateDoc(docRef, {
     rating: newAvgRating,
     numOfRatings: newNumOfRatings
@@ -131,7 +120,6 @@ export const handlePhotoUpload = (file, folder, user) => {
     'state_changed',
     (err) => console.log(err),
     () => {
-      // download url
       getDownloadURL(uploadTask.snapshot.ref).then((url) => {
         console.log(url);
       });
@@ -235,7 +223,7 @@ export const useExpertDb = () => {
   const itemsColRef = collection(db, 'experts');
   const dataQuery = query(itemsColRef);
   return useDbData(dataQuery);
-};
+};a
 
 export const useExpertContentDb = (expert) => {
   const itemsColRef = collection(db, 'expert content');
